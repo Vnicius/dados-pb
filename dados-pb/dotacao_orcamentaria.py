@@ -13,33 +13,18 @@ class Download(DownloadTemplate):
                  start_year=2000,
                  start_month=1,
                  end_year=TIME_NOW.year,
-                 end_month=TIME_NOW.month):
+                 end_month=TIME_NOW.month,
+                 merge_data=False):
 
-        super(Download, self).__init__(BASE_URL, FILE_NAME, file_type,
-                                       start_year, start_month, end_year, end_month)
+        super(Download, self).__init__(base_url=BASE_URL, file_name=FILE_NAME, file_type=file_type,
+                                       start_year=start_year, start_month=start_month,
+                                       end_year=end_year, end_month=end_month,
+                                       only_year=False, merge_data=merge_data)
 
     def get_url(self, year, month):
         return BASE_URL.format(self.file_type, year, month)
 
     def preprocess(self, df):
-        df = df[[
-            'unidade_gestora',
-            'exercicio',
-            'unidade_orcamentaria',
-            'funcao',
-            'subfuncao',
-            'programa',
-            'acao',
-            'meta',
-            'localidade',
-            'categoria',
-            'grupo_despesa',
-            'modalidade',
-            'elemento_despesa',
-            'fonte_recurso',
-            'valor_orcado'
-        ]]
-
         return df.rename(columns={
             'unidade_gestora': 'und_gestora',
             'exercicio': 'exercicio',
@@ -60,4 +45,5 @@ class Download(DownloadTemplate):
 
 
 if __name__ == '__main__':
-    Download(start_year=2019, end_month=1).download()
+    Download(start_year=2018, start_month=12,
+             merge_data=True, file_type='json').download()
