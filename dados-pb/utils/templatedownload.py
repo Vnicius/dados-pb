@@ -11,7 +11,7 @@ from utils.format import format_month
 TIME_NOW = dt.now()
 
 
-class DownloadTemplate():
+class TemplateDownload():
     def __init__(self,
                  base_url,
                  file_name,
@@ -54,8 +54,8 @@ class DownloadTemplate():
             else:
                 self.end_month = self.end_month - 1
 
-        date_str = f'{format_month(self.start_month)}{self.start_year}_{format_month(self.end_month)}{self.end_year}'
-        data_dir = f'data_{date_str}'
+        date_str = '{}{}_{}{}'.format(format_month(self.start_month), self.start_year, format_month(self.end_month), self.end_year)
+        data_dir = 'data_{}'.format(date_str)
         tmp_dir = 'tmp'
         data_path = os.path.join(data_dir, self.file_name)
         data_tmp_path = os.path.join(data_dir, tmp_dir)
@@ -80,25 +80,26 @@ class DownloadTemplate():
                     data = req.get(self.get_url(y, m)).content
                     if self.merge_data:
                         datas.append(self.__get_df(
-                            data_tmp_path, data, f'{self.file_name}_{y}{format_month(m)}'))
+                            data_tmp_path, data, '{}_{}{}'.format(self.file_name, y, format_month(m))))
                     else:
                         self.__save(data_path, data,
-                                    f'{self.file_name}_{y}{format_month(m)}')
+                                    '{}_{}{}'.format(self.file_name, y, format_month(m)))
 
             else:
                 data = req.get(self.get_url(y, 0)).content
 
                 if self.merge_data:
                     datas.append(self.__get_df(
-                        data_tmp_path, data, f'{self.file_name}_{y}'))
+                        data_tmp_path, data, '{}_{}'.format(self.file_name, y)))
                 else:
-                    self.__save(data_path, data, f'{self.file_name}_{y}')
+                    self.__save(data_path, data, '{}_{}'.format(self.file_name, y))
 
         if self.merge_data:
             df = pd.concat(datas)
             self.__save_df(data_dir, df, self.file_name)
 
         shutil.rmtree(data_tmp_path)
+        shutil.rmtree(data_path)
 
     def __save(self, path, data, file_name):
         df = self.__get_df(path, data, file_name)
@@ -110,21 +111,21 @@ class DownloadTemplate():
 
         if self.file_type == 'csv':
             df.to_csv(os.path.join(
-                path, f'{file_name}.{self.file_type}'), **params)
+                path, '{}.{}'.format(file_name, self.file_type)), **params)
 
         elif self.file_type == 'json':
             df.to_json(os.path.join(
-                path, f'{file_name}.{self.file_type}'), **params_json)
+                path, '{}.{}'.format(file_name, self.file_type)), **params_json)
 
     def __get_df(self, path, data, file_name):
         df = {}
         if self.file_type == 'csv':
             df = csv_to_df(
-                os.path.join(path, f'{file_name}.{self.file_type}'), data)
+                os.path.join(path, '{}.{}'.format(file_name, self.file_type)), data)
 
         elif self.file_type == 'json':
             df = json_to_df(os.path.join(
-                path, f'{file_name}.{self.file_type}'), data)
+                path, '{}.{}'.format(file_name, self.file_type)), data)
 
         df = self.preprocess(df)
 

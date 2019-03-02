@@ -1,13 +1,13 @@
 from datetime import datetime as dt
 from utils.createdir import createdir
-from utils.dowloadtemplate import DownloadTemplate
+from utils.templatedownload import TemplateDownload
 
 BASE_URL = 'http://dados.pb.gov.br:80/get{}?nome=dotacao&exercicio={}&mes={}'
 FILE_NAME = 'dotacao_orcamentaria'
 TIME_NOW = dt.now()
 
 
-class Download(DownloadTemplate):
+class Download(TemplateDownload):
     def __init__(self,
                  file_type='csv',
                  start_year=2000,
@@ -46,4 +46,4 @@ class Download(DownloadTemplate):
 
 if __name__ == '__main__':
     Download(start_year=2018, start_month=12,
-             merge_data=True, file_type='json').download()
+             merge_data=True, file_type='csv').download()
