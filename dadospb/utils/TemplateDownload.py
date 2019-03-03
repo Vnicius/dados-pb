@@ -7,6 +7,7 @@ from utils.createdir import createdir
 from utils.csvtodf import csv_to_df
 from utils.jsontodf import json_to_df
 from utils.format import format_month
+from halo import Halo
 
 TIME_NOW = dt.now()
 
@@ -32,6 +33,9 @@ class TemplateDownload():
         self.only_year = only_year
         self.merge_data = merge_data
 
+    def get_description(self):
+        raise NotImplementedError
+
     def get_url(self, year, month):
         raise NotImplementedError
 
@@ -39,6 +43,9 @@ class TemplateDownload():
         raise NotImplementedError
 
     def download(self):
+        spinner = Halo(text=f'Downloading {self.get_description()}', spinner='dots')
+        spinner.start()
+
         if self.end_year == 0 or self.end_month == 0:
             self.end_year = self.start_year
             self.end_month = self.start_month
@@ -105,6 +112,8 @@ class TemplateDownload():
         
         if self.merge_data:
             shutil.rmtree(data_path)
+        
+        spinner.succeed(text=self.get_description())
 
     def __save(self, path, data, file_name):
         df = self.__get_df(path, data, file_name)
