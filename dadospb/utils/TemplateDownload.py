@@ -102,7 +102,9 @@ class TemplateDownload():
             self.__save_df(data_dir, df, self.file_name)
 
         shutil.rmtree(data_tmp_path)
-        shutil.rmtree(data_path)
+        
+        if self.merge_data:
+            shutil.rmtree(data_path)
 
     def __save(self, path, data, file_name):
         df = self.__get_df(path, data, file_name)
