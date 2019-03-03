@@ -1,6 +1,7 @@
 from datetime import datetime as dt
 from utils.createdir import createdir
-from utils.templatedownload import TemplateDownload
+from utils.TemplateDownload import TemplateDownload
+from utils.DownloadArgs import DownloadArgs
 
 BASE_URL = 'http://dados.pb.gov.br:80/get{}?nome=dotacao&exercicio={}&mes={}'
 FILE_NAME = 'dotacao_orcamentaria'
@@ -12,8 +13,8 @@ class Download(TemplateDownload):
                  file_type='csv',
                  start_year=2000,
                  start_month=1,
-                 end_year=TIME_NOW.year,
-                 end_month=TIME_NOW.month,
+                 end_year=0,
+                 end_month=0,
                  merge_data=False):
 
         super(Download, self).__init__(base_url=BASE_URL, file_name=FILE_NAME, file_type=file_type,
@@ -45,5 +46,8 @@ class Download(TemplateDownload):
 
 
 if __name__ == '__main__':
-    Download(start_year=2018, start_month=12,
-             merge_data=True, file_type='csv').download()
+    args = DownloadArgs().get_args()
+
+    Download(start_year=args.year, start_month=args.month,
+             end_year=args.untilyear, end_month=args.untilmonth,
+             merge_data=args.merge, file_type=args.format).download()

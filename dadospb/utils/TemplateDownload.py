@@ -17,8 +17,8 @@ class TemplateDownload():
                  file_type='csv',
                  start_year=2000,
                  start_month=1,
-                 end_year=TIME_NOW.year,
-                 end_month=TIME_NOW.month,
+                 end_year=0,
+                 end_month=0,
                  only_year=False,
                  merge_data=False):
 
@@ -39,6 +39,10 @@ class TemplateDownload():
         raise NotImplementedError
 
     def download(self):
+        if self.end_year == 0 or self.end_month == 0:
+            self.end_year = self.start_year
+            self.end_month = self.start_month
+        
         if self.start_year == TIME_NOW.year and self.start_month == TIME_NOW.month:
             if TIME_NOW.month == 1:
                 self.start_year = self.start_year - 1
