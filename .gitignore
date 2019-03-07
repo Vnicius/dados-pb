@@ -106,4 +106,6 @@ venv.bak/
 dados-pb/data/
 data*
 
+*.log
+
 .vscode
