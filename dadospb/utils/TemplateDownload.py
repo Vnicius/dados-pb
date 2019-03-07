@@ -1,5 +1,6 @@
 import os
 import requests as req
+from requests.exceptions import ConnectionError
 from datetime import datetime as dt
 import pandas as pd
 import shutil
@@ -33,7 +34,7 @@ class TemplateDownload():
         self.only_year = only_year
         self.merge_data = merge_data
 
-    def get_description(self):
+    def get_title(self):
         raise NotImplementedError
 
     def get_url(self, year, month):
@@ -41,11 +42,8 @@ class TemplateDownload():
 
     def preprocess(self, df):
         raise NotImplementedError
-
-    def download(self):
-        spinner = Halo(text=f'Downloading {self.get_description()}', spinner='dots')
-        spinner.start()
-
+    
+    def __fix_period(self):
         if self.end_year == 0 or self.end_month == 0:
             self.end_year = self.start_year
             self.end_month = self.start_month
@@ -63,17 +61,36 @@ class TemplateDownload():
                 self.end_month = 12
             else:
                 self.end_month = self.end_month - 1
+    
+    def __format_period(self):
+        if self.start_month == self.end_month and self.start_year == self.end_year:
+            return f'{format_month(self.start_month)}{self.start_year}'
+        else:
+            return f'{format_month(self.start_month)}{self.start_year}_{format_month(self.end_month)}{self.end_year}'
 
-        date_str = f'{format_month(self.start_month)}{self.start_year}_{format_month(self.end_month)}{self.end_year}'
+    def download(self):
+        # iniciar o spinner
+        spinner = Halo(text=f'Baixando {self.get_title()}...', spinner='dots')
+        spinner.start()
+        
+        data_dir = '' # diretorio dos dados
+        tmp_dir = 'tmp' # diretório temporário
+        data_path = '' # caminho do arquivo
+        data_tmp_path = '' # caminho do arquivo temporário
+        datas = []  # lista de dados
+        date_str = '' # período de tempo formatado em string
+
+        # ajeitar o ano e o mês
+        self.__fix_period()
+
+        date_str = self.__format_period()
         data_dir = f'data_{date_str}'
-        tmp_dir = 'tmp'
         data_path = os.path.join(data_dir, self.file_name)
         data_tmp_path = os.path.join(data_dir, tmp_dir)
-        datas = []
 
-        createdir(data_dir)
-        createdir(os.path.join(data_dir, tmp_dir))
-        createdir(data_path)
+        createdir(data_dir) # criar o diretório dos dados
+        createdir(os.path.join(data_dir, tmp_dir)) # criar o diretório temporário
+        createdir(data_path) # cirar diretório para os arqivos baixados
 
         for y in range(self.start_year, self.end_year + 1):
             start = 1
@@ -85,9 +102,17 @@ class TemplateDownload():
             if y == self.end_year:
                 end = self.end_month
 
+            # se os dados são mensais
             if not self.only_year:
                 for m in range(start, end + 1):
-                    data = req.get(self.get_url(y, m)).content
+                    # realizar o dowload dos dados
+                    try:
+                        # realizar dowload dos dados
+                        data = req.get(self.get_url(y, m)).content
+                    except ConnectionError :
+                        spinner.fail(text=f'Erro ao baixar {self.get_title()}')
+                        return
+
                     if self.merge_data:
                         datas.append(self.__get_df(
                             data_tmp_path, data, f'{self.file_name}_{y}{format_month(m)}'))
@@ -96,7 +121,13 @@ class TemplateDownload():
                                     f'{self.file_name}_{y}{format_month(m)}')
 
             else:
-                data = req.get(self.get_url(y, 0)).content
+                # se os dados são anuais
+                try:
+                    # realizar dowload dos dados
+                    data = req.get(self.get_url(y, 0)).content
+                except ConnectionError :
+                    spinner.fail(text=f'Erro ao baixar {self.get_title()}')
+                    return
 
                 if self.merge_data:
                     datas.append(self.__get_df(
@@ -104,40 +135,55 @@ class TemplateDownload():
                 else:
                     self.__save(data_path, data, f'{self.file_name}_{y}')
 
+        # junstar os arquivos
         if self.merge_data:
             df = pd.concat(datas)
             self.__save_df(data_dir, df, self.file_name)
 
+        # remover a o diretório temporário
         shutil.rmtree(data_tmp_path)
         
+        # remover os diretório com os arquvios separados
         if self.merge_data:
             shutil.rmtree(data_path)
         
-        spinner.succeed(text=self.get_description())
+        # finalizar o spinner
+        spinner.succeed(text=self.get_title())
 
     def __save(self, path, data, file_name):
+
+        # pegar o dataframe
         df = self.__get_df(path, data, file_name)
+
+        # salvar o arquivo
         self.__save_df(path, df, file_name)
 
     def __save_df(self, path, df, file_name):
+        
         params = {'encoding': 'utf-8', 'sep': ',', 'index': False}
         params_json = {'orient': 'records'}
 
         if self.file_type == 'csv':
+            # salvar csv
             df.to_csv(os.path.join(
                 path, f'{file_name}.{self.file_type}'), **params)
 
         elif self.file_type == 'json':
+            # salvar json
             df.to_json(os.path.join(
                 path, f'{file_name}.{self.file_type}'), **params_json)
 
     def __get_df(self, path, data, file_name):
+        
         df = {}
+
         if self.file_type == 'csv':
+            # ler csv
             df = csv_to_df(
                 os.path.join(path, f'{file_name}.{self.file_type}'), data)
 
         elif self.file_type == 'json':
+            # ler json
             df = json_to_df(os.path.join(
                 path, f'{file_name}.{self.file_type}'), data)
 

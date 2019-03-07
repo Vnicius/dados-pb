@@ -25,7 +25,7 @@ class Download(TemplateDownload):
     def get_url(self, year, month):
         return BASE_URL.format(self.file_type, year, month)
     
-    def get_description(self):
+    def get_title(self):
         return 'Dotação Orçamentária'
 
     def preprocess(self, df):
