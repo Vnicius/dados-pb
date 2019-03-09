@@ -23,7 +23,8 @@ class TemplateDownload():
                  end_year=0,
                  end_month=0,
                  only_year=False,
-                 merge_data=False):
+                 merge_data=False,
+                 output_dir='data'):
 
         self.base_url = base_url
         self.file_name = file_name
@@ -34,6 +35,7 @@ class TemplateDownload():
         self.end_month = end_month
         self.only_year = only_year
         self.merge_data = merge_data
+        self.output_dir = output_dir
 
     def get_title(self):
         raise NotImplementedError
@@ -49,6 +51,13 @@ class TemplateDownload():
             self.end_year = self.start_year
             self.end_month = self.start_month
         
+        if self.start_year == self.end_year:
+            if self.start_month > self.end_month:
+                self.start_month, self.end_month = self.end_month, self.start_month
+        elif self.start_year > self.end_year:
+            self.start_year, self.end_year = self.end_year, self.start_year
+            self.start_month, self.end_month = self.end_month, self.start_month
+        
         if self.start_year == TIME_NOW.year and self.start_month == TIME_NOW.month:
             if TIME_NOW.month == 1:
                 self.start_year = self.start_year - 1
@@ -62,12 +71,6 @@ class TemplateDownload():
                 self.end_month = 12
             else:
                 self.end_month = self.end_month - 1
-    
-    def __format_period(self):
-        if self.start_month == self.end_month and self.start_year == self.end_year:
-            return f'{format_month(self.start_month)}{self.start_year}'
-        else:
-            return f'{format_month(self.start_month)}{self.start_year}_{format_month(self.end_month)}{self.end_year}'
 
     def download(self):
         # iniciar o spinner
@@ -77,17 +80,18 @@ class TemplateDownload():
         # ajeitar o ano e o mês
         self.__fix_period()
         
-        date_str = self.__format_period() # período de tempo formatado em string
-        data_dir = f'data_{date_str}' # diretorio dos dados
+        data_dir = self.output_dir # diretorio dos dados
         tmp_dir = 'tmp' # diretório temporário
         data_path = os.path.join(data_dir, self.file_name) # caminho do arquivo
         data_tmp_path = os.path.join(data_dir, tmp_dir) # caminho do arquivo temporário
         datas = []  # lista de dados
-
-        logging.basicConfig(filename=f'log_{date_str}.log', level=logging.INFO, format='%(asctime)s: %(module)s: %(levelname)s: %(message)s')
-
-        logging.info(f'Criando diretório "{data_dir}"')
+        
         createdir(data_dir) # criar o diretório dos dados
+
+        logging.basicConfig(filename=os.path.join(data_dir, f'log.log'),
+                            level=logging.INFO, 
+                            format='%(asctime)s: %(module)s: %(levelname)s: %(message)s')
+
 
         logging.info(f'Criando diretório "{os.path.join(data_dir, tmp_dir)}"')
         createdir(os.path.join(data_dir, tmp_dir)) # criar o diretório temporário

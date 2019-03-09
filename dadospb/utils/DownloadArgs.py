@@ -13,6 +13,7 @@ class DownloadArgs():
         parser.add_argument('--untilmonth', help='mês final dos documentos', type=int, default=0)
         parser.add_argument('--untilyear', help='ano final dos documentos', type=int, default=0)
         parser.add_argument('--db', help='gerar arquivo .db', action='store_true')
+        parser.add_argument('-o', '--output', help='diretório de saída', type=str, default='')
         self.args = parser.parse_args()
     
     def get_args(self):
