@@ -7,6 +7,8 @@ BASE_URL = 'http://dados.pb.gov.br:80/get{}?nome=dotacao&exercicio={}&mes={}'
 FILE_NAME = 'dotacao_orcamentaria'
 
 class Download(TemplateDownload):
+    ''' Classe para realizar o download dos documentos de Dotação Orçamentária '''
+
     def __init__(self,
                  file_type='csv',
                  start_year=2000,
@@ -15,6 +17,20 @@ class Download(TemplateDownload):
                  end_month=0,
                  merge_data=False,
                  output_dir="data"):
+        '''
+            Construtor da Classe Download
+
+            Attr:
+                file_type (str): tipo do arquivo de saída (default: "csv")
+                start_year (int): ano inicial (default: 2000)
+                start_month (int): mês inicial (default: 1)
+                end_year (int): ano final (default: 0)
+                end_month (int): mês final (default: 0)
+                merge_data (bool): se deve ser realizada a junção 
+                    de todos os arquivos do período (default: false)
+                output_dir (str): diretôrio de saída (default: "data")
+
+        '''
 
         super(Download, self).__init__(base_url=BASE_URL, file_name=FILE_NAME, file_type=file_type,
                                        start_year=start_year, start_month=start_month,

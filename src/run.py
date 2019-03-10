@@ -6,11 +6,26 @@ from utils.DownloadArgs import DownloadArgs
 IGNORE_FILES = ['__init__.py', 'run.py']
 
 def main(args):
+    '''
+        Executa os scripts de download
+
+        Params:
+            args: argumentos
+    '''
+
+    # buscar todos os arquivos .py
     files = glob.glob('*.py')
     files = [ f for f in files if not f in IGNORE_FILES ]
     
-    output_dir = f'data_{dt.now().strftime("%d-%m-%Y")}'
+    # definir o diretôrio de saída
+    output_dir = ''
 
+    if args.output_dir:
+        output_dir = output_dir
+    else:
+        output_dir = f'data_{dt.now().strftime("%d-%m-%Y")}'
+
+    # executar os scripts
     for f in files:
         module_name = f.replace('.py', '')
         module = __import__(module_name)

@@ -14,6 +14,23 @@ import logging
 TIME_NOW = dt.now()
 
 class TemplateDownload():
+    '''
+        Classe de template para realizar os downloads dos arquivos
+
+        Attr:
+            base_url (str): URL base para os downloads
+            file_name (str): nome do arquivo
+            file_type (str): tipo do arquivo a ser baixado
+            start_year (int): ano inicial
+            start_month (int): mês inicial
+            end_year (int): ano final
+            end_month (int): mês final
+            only_year (bool): se o arquivo é anual
+            merge_data (bool): se deve ser realizada a junção 
+                de todos os arquivos do período
+            output_dir (str): diretôrio de saída
+    '''
+
     def __init__(self,
                  base_url,
                  file_name,
@@ -25,6 +42,22 @@ class TemplateDownload():
                  only_year=False,
                  merge_data=False,
                  output_dir='data'):
+        '''
+            Construtor da classe TemplateDownload
+
+            Params:
+                base_url (str): URL base para os downloads
+                file_name (str): nome do arquivo
+                file_type (str): tipo do arquivo a ser baixado (default: "csv")
+                start_year (int): ano inicial (default: 2000)
+                start_month (int): mês inicial (default: 1)
+                end_year (int): ano final (default: 0)
+                end_month (int): mês final (default: 0)
+                only_year (bool): se o arquivo é anual (default: False)
+                merge_data (bool): se deve ser realizada a junção (default: False)
+                    de todos os arquivos do período
+                output_dir (str): diretôrio de saída (default: "data")
+        '''
 
         self.base_url = base_url
         self.file_name = file_name
@@ -38,19 +71,51 @@ class TemplateDownload():
         self.output_dir = output_dir
 
     def get_title(self):
+        ''' 
+            Retorna o título do módulo
+
+            Returns:
+                (str): título
+        '''
+        
         raise NotImplementedError
 
     def get_url(self, year, month):
+        '''
+            Retorna a URL formatada para um dado ano e mês
+
+            Params:
+                year (int): ano do arquivo
+                month (int): mês do arquivo
+            
+            Returns:
+                (str): URL formatada
+        '''
+        
         raise NotImplementedError
 
     def preprocess(self, df):
+        '''
+            Pré-processa o dataframe
+
+            Params:
+                df (DataFrame): objeto DataFrame atual
+            
+            Returns:
+                (DataFrame): objeto DataFrama pré-processado
+        '''
+
         raise NotImplementedError
     
     def __fix_period(self):
+        ''' Conserta os valores do período de consulta '''
+
+        # verifica se o perído final não foi definido
         if self.end_year == 0 or self.end_month == 0:
             self.end_year = self.start_year
             self.end_month = self.start_month
         
+        # verifica se o período final é anterior ao inicial
         if self.start_year == self.end_year:
             if self.start_month > self.end_month:
                 self.start_month, self.end_month = self.end_month, self.start_month
@@ -58,13 +123,8 @@ class TemplateDownload():
             self.start_year, self.end_year = self.end_year, self.start_year
             self.start_month, self.end_month = self.end_month, self.start_month
         
-        if self.start_year == TIME_NOW.year and self.start_month == TIME_NOW.month:
-            if TIME_NOW.month == 1:
-                self.start_year = self.start_year - 1
-                self.start_month = 12
-            else:
-                self.start_month = self.start_month - 1
-
+        # verifica se o período final é igual ao mês/ano corrente
+        # os dados do mês atual só são diponíveis no final do mesmo
         if self.end_year == TIME_NOW.year and self.end_month == TIME_NOW.month:
             if TIME_NOW.month == 1:
                 self.end_year = self.end_year - 1
@@ -73,6 +133,10 @@ class TemplateDownload():
                 self.end_month = self.end_month - 1
 
     def download(self):
+        '''
+            Realiza o download dos arquivos num dado perído de tempo
+        '''
+
         # iniciar o spinner
         spinner = Halo(text=f'Baixando {self.get_title()}', spinner='dots')
         spinner.start()
@@ -170,7 +234,15 @@ class TemplateDownload():
         spinner.succeed(text=self.get_title())
 
     def __save(self, path, data, file_name):
+        '''
+            Salva um arquivo
 
+            Params:
+                path (str): caminho onde o arquivo deve ser salvo
+                data (str): conteúdo do arquivo
+                file_name (str): nome do arquivo
+        '''
+        
         # pegar o dataframe
         df = self.__get_df(path, data, file_name)
 
@@ -178,9 +250,18 @@ class TemplateDownload():
         self.__save_df(path, df, file_name)
 
     def __save_df(self, path, df, file_name):
+        '''
+            Salva um objeto DataFrame
+
+            Params:
+                path (str): caminho onde o arquivo deve ser salvo
+                df (DataFrame): objeto DataFrame
+                file_name (str): nome do arquivo
+        '''
         
         logging.info(f'Salvando o arquivo "{file_name}" em "{path}"')
 
+        # definir parâmetros de salvamento
         params = {'encoding': 'utf-8', 'sep': ',', 'index': False}
         params_json = {'orient': 'records'}
 
@@ -197,6 +278,14 @@ class TemplateDownload():
         logging.info(f'Arquivo "{file_name}" salvo em "{path}"')
 
     def __get_df(self, path, data, file_name):
+        '''
+            Adiquirir o objeto DataFrame a partir de um conjunto de dados
+
+            Params:
+                path (str): caminho onde o arquivo deve ser salvo
+                data (str): conteúdo do arquivo
+                file_name (str): nome do arquivo
+        '''
         
         logging.info(f'Lendo {file_name}.{self.file_type}')
 

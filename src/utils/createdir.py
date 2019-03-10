@@ -1,7 +1,13 @@
 import os
 
 def createdir(path):
-  try:
-    os.mkdir(path)
-  except:
-    pass
+    '''
+        Cria um diretório se ele não existir
+
+        Params:
+            path (str): caminho do diretório
+    '''
+    try:
+        os.mkdir(path)
+    except:
+        pass
