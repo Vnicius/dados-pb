@@ -5,8 +5,6 @@ from utils.DownloadArgs import DownloadArgs
 
 BASE_URL = 'http://dados.pb.gov.br:80/get{}?nome=dotacao&exercicio={}&mes={}'
 FILE_NAME = 'dotacao_orcamentaria'
-TIME_NOW = dt.now()
-
 
 class Download(TemplateDownload):
     def __init__(self,
