@@ -68,7 +68,7 @@ optional arguments:
   $ python run.py 2 2019
 ```
 
-- 2 - Realizar o download dos documentos em `.json` referentes ao perído de 02/2018 a 02/2018
+- 2 - Realizar o download dos documentos em `.json` referentes ao perído de 02/2018 a 02/2019
 
 ```
   $ cd src
