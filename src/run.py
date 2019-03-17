@@ -20,8 +20,8 @@ def main(args):
     # definir o diretôrio de saída
     output_dir = ''
 
-    if args.output_dir:
-        output_dir = output_dir
+    if args.output:
+        output_dir = args.output
     else:
         output_dir = f'data_{dt.now().strftime("%d-%m-%Y")}'
 
