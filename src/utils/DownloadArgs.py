@@ -16,7 +16,7 @@ class DownloadArgs():
         parser.add_argument('-f', '--format', 
                             help='escolher formato de saída dos arquivos', type=str,
                             choices=['csv', 'json'], default='csv')
-        parser.add_argument('month', help='mês dos documentos', type=intz)
+        parser.add_argument('month', help='mês dos documentos', type=int)
         parser.add_argument('year', help='ano dos documentos', type=int)
         parser.add_argument('--untilmonth', help='mês final dos documentos', type=int, default=0)
         parser.add_argument('--untilyear', help='ano final dos documentos', type=int, default=0)
