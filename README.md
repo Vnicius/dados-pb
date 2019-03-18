@@ -74,3 +74,13 @@ optional arguments:
   $ cd src
   $ python run.py 2 2018 --untilmonth 2 --untilyear 2019 -f json
 ```
+
+## Notações
+
+- un - Unidade
+- cd - Código
+- num - Número
+- tp - tipo
+- doc - documento
+- dt - data
+- desc - descrição
