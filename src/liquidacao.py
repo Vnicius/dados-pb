@@ -9,34 +9,20 @@ FILE_NAME = 'liquidacao'
 class Download(TemplateDownload):
     ''' Classe para realizar o download dos documentos de Dotação Orçamentária '''
 
-    def __init__(self,
-                 file_type='csv',
-                 start_year=2000,
-                 start_month=1,
-                 end_year=0,
-                 end_month=0,
-                 merge_data=False,
-                 output_dir="data"):
+    def __init__(self, args):
         '''
             Construtor da Classe Download
 
             Attr:
-                file_type (str): tipo do arquivo de saída (default: "csv")
-                start_year (int): ano inicial (default: 2000)
-                start_month (int): mês inicial (default: 1)
-                end_year (int): ano final (default: 0)
-                end_month (int): mês final (default: 0)
-                merge_data (bool): se deve ser realizada a junção 
-                    de todos os arquivos do período (default: false)
-                output_dir (str): diretôrio de saída (default: "data")
+                args (DownloadArgs): argumentos para o download
 
         '''
 
-        super(Download, self).__init__(base_url=BASE_URL, file_name=FILE_NAME, file_type=file_type,
-                                       start_year=start_year, start_month=start_month,
-                                       end_year=end_year, end_month=end_month,
-                                       only_year=False, merge_data=merge_data,
-                                       output_dir=output_dir)
+        super(Download, self).__init__(base_url=BASE_URL, file_name=FILE_NAME, file_type=args.format,
+                                       start_year=args.year, start_month=args.month,
+                                       end_year=args.untilyear, end_month=args.untilmonth,
+                                       only_year=False, merge_data=args.merge,
+                                       output_dir=args.output)
 
     def get_url(self, year, month):
         return BASE_URL.format(self.file_type, year, month)
@@ -78,15 +64,9 @@ class Download(TemplateDownload):
 
 if __name__ == '__main__':
 
-    output_dir = ''
     args = DownloadArgs().get_args()
 
-    if args.output:
-        output_dir = args.output
-    else:
-        output_dir = "liquidacao"
+    if not args.output:
+        args.output = "data_liquidacao"
 
-    Download(start_year=args.year, start_month=args.month,
-             end_year=args.untilyear, end_month=args.untilmonth,
-             merge_data=args.merge, file_type=args.format,
-             output_dir=output_dir).download()
+    Download(args).download()
