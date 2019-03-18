@@ -29,6 +29,7 @@ class TemplateDownload():
             merge_data (bool): se deve ser realizada a junção 
                 de todos os arquivos do período
             output_dir (str): diretôrio de saída
+            periodic_data (bool): se os dados são atualizados periodicamente
     '''
 
     def __init__(self,
@@ -41,7 +42,8 @@ class TemplateDownload():
                  end_month=0,
                  only_year=False,
                  merge_data=False,
-                 output_dir='data'):
+                 output_dir='data',
+                 periodic_data=True):
         '''
             Construtor da classe TemplateDownload
 
@@ -57,6 +59,7 @@ class TemplateDownload():
                 merge_data (bool): se deve ser realizada a junção (default: False)
                     de todos os arquivos do período
                 output_dir (str): diretôrio de saída (default: "data")
+                periodic_data (bool): se os dados são atualizados periodicamente
         '''
 
         self.base_url = base_url
@@ -69,6 +72,9 @@ class TemplateDownload():
         self.only_year = only_year
         self.merge_data = merge_data
         self.output_dir = output_dir
+        self.periodic_data = periodic_data
+
+        self.__spinner = Halo(text=f'Baixando {self.get_title()}', spinner='dots')
 
     def get_title(self):
         ''' 
@@ -132,36 +138,112 @@ class TemplateDownload():
             else:
                 self.end_month = self.end_month - 1
 
+    def __spinner_start(self):
+        '''
+            Iniciar spinner
+        '''
+
+        self.__spinner.start()
+    
+    def __spinner_succeed(self):
+        '''
+            Parar spinner com mensagem de sucesso
+        '''
+
+        self.__spinner.succeed(text=self.get_title())
+    
+    def __spinner_fail(self):
+        '''
+            Parar spinner com mensagem de erro
+        '''
+
+        self.__spinner.fail(text=f'Erro ao baixar {self.get_title()}')
+    
+    def __is_single_date(self):
+        '''
+            Verifica se o download é de apenas um único mês/ano
+        '''
+
+        if (self.start_year == self.end_year and self.start_month == self.end_month) or self.end_year == self.end_month:
+            return True
+        
+        return False
+
     def download(self):
         '''
-            Realiza o download dos arquivos num dado perído de tempo
+            Realizar o download
         '''
 
-        # iniciar o spinner
-        spinner = Halo(text=f'Baixando {self.get_title()}', spinner='dots')
-        spinner.start()
+        if self.periodic_data:
+            self.__download_in_period()
+        else:
+            self.__download_fixed_data()
 
-        # ajeitar o ano e o mês
-        self.__fix_period()
+    def __download_fixed_data(self):
+        '''
+            Realizar o download do arquivo sem período de tempo
+        '''
+        # iniciar o spinner
+        self.__spinner_start()
         
         data_dir = self.output_dir # diretorio dos dados
-        tmp_dir = 'tmp' # diretório temporário
-        data_path = os.path.join(data_dir, self.file_name) # caminho do arquivo
-        data_tmp_path = os.path.join(data_dir, tmp_dir) # caminho do arquivo temporário
-        datas = []  # lista de dados
-        
+        data = ''
+
         createdir(data_dir) # criar o diretório dos dados
 
         logging.basicConfig(filename=os.path.join(data_dir, f'log.log'),
                             level=logging.INFO, 
                             format='%(asctime)s: %(module)s: %(levelname)s: %(message)s')
 
+        try:
+            # realizar dowload dos dados
+            logging.info(f'Baixando {self.get_url(0, 0)}')
+            
+            data = req.get(self.get_url(0, 0)).content
 
+            logging.info(f'Baixado')
+        except ConnectionError :
+            logging.error(f'Erro ao baixar {self.get_url(0, 0)}')
+            self.__spinner_fail()
+            return
+        
+        # salvar o arquivo
+        self.__save(data_dir, data, self.file_name)
+
+        # finalizar o spinner
+        self.__spinner_succeed()
+
+    def __download_in_period(self):
+        '''
+            Realiza o download dos arquivos num dado perído de tempo
+        '''
+
+        # iniciar o spinner
+        self.__spinner_start()
+
+        # ajeitar o ano e o mês
+        self.__fix_period()
+        
+        data_dir = self.output_dir # diretorio dos dados
+        tmp_dir = 'tmp' # diretório temporário
+        data_path = data_dir if self.__is_single_date() else os.path.join(data_dir, self.file_name) # caminho do arquivo
+        data_tmp_path = os.path.join(data_dir, tmp_dir) # caminho do arquivo temporário
+        datas = []  # lista de dados
+        
+        # criar o diretório dos dados
+        createdir(data_dir)
+
+        logging.basicConfig(filename=os.path.join(data_dir, f'log.log'),
+                            level=logging.INFO, 
+                            format='%(asctime)s: %(module)s: %(levelname)s: %(message)s')
+
+        # criar o diretório temporário
         logging.info(f'Criando diretório "{os.path.join(data_dir, tmp_dir)}"')
-        createdir(os.path.join(data_dir, tmp_dir)) # criar o diretório temporário
+        createdir(os.path.join(data_dir, tmp_dir)) 
 
+        # cirar diretório para os arqivos baixados
         logging.info(f'Criando diretório "{data_path}"')
-        createdir(data_path) # cirar diretório para os arqivos baixados
+        createdir(data_path)
 
         for y in range(self.start_year, self.end_year + 1):
             start = 1
@@ -186,7 +268,7 @@ class TemplateDownload():
                         logging.info(f'Baixado')
                     except ConnectionError :
                         logging.error(f'Erro ao baixar {self.get_url(y, m)}')
-                        spinner.fail(text=f'Erro ao baixar {self.get_title()}')
+                        self.__spinner_fail()
                         return
 
                     if self.merge_data:
@@ -205,7 +287,7 @@ class TemplateDownload():
                     data = req.get(self.get_url(y, 0)).content
                 except ConnectionError:
                     logging.error(f'Erro ao baixar {self.get_url(y, 0)}')
-                    spinner.fail(text=f'Erro ao baixar {self.get_title()}')
+                    self.__spinner_fail()
                     return
 
                 if self.merge_data:
@@ -215,7 +297,7 @@ class TemplateDownload():
                 else:
                     self.__save(data_path, data, f'{self.file_name}_{y}')
 
-        # junstar os arquivos
+        # juntar os arquivos
         if self.merge_data:
             logging.info(f'Juntando os arquivos')
             df = pd.concat(datas)
@@ -231,7 +313,7 @@ class TemplateDownload():
             shutil.rmtree(data_path)
         
         # finalizar o spinner
-        spinner.succeed(text=self.get_title())
+        self.__spinner_succeed()
 
     def __save(self, path, data, file_name):
         '''
