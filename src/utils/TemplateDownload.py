@@ -273,8 +273,13 @@ class TemplateDownload():
 
                     if self.merge_data:
                         logging.info(f'Guardando os dados de "{self.file_name}_{y}{format_month(m)}"')
-                        datas.append(self.__get_df(
-                            data_tmp_path, data, f'{self.file_name}_{y}{format_month(m)}'))
+                        data_df = self.__get_df(
+                            data_tmp_path, data, f'{self.file_name}_{y}{format_month(m)}')
+                        
+                        if data_df.empty:
+                            logging.info(f'VAZIO: "{self.file_name}_{y}{format_month(m)}"')
+                        else:
+                            datas.append(data_df)
                     else:
                         self.__save(data_path, data,
                                     f'{self.file_name}_{y}{format_month(m)}')
@@ -292,8 +297,13 @@ class TemplateDownload():
 
                 if self.merge_data:
                     logging.info(f'Guardando os dados de "{self.file_name}_{y}"')
-                    datas.append(self.__get_df(
-                        data_tmp_path, data, f'{self.file_name}_{y}'))
+                    data_df = self.__get_df(
+                        data_tmp_path, data, f'{self.file_name}_{y}')
+
+                    if data_df.empty:
+                        logging.info(f'VAZIO: "{self.file_name}_{y}"')
+                    else:
+                        datas.append(data_df)
                 else:
                     self.__save(data_path, data, f'{self.file_name}_{y}')
 
@@ -327,6 +337,9 @@ class TemplateDownload():
         
         # pegar o dataframe
         df = self.__get_df(path, data, file_name)
+
+        if df.empty:
+            logging.info(f'VAZIO: "{file_name}"')
 
         # salvar o arquivo
         self.__save_df(path, df, file_name)
@@ -371,18 +384,21 @@ class TemplateDownload():
         
         logging.info(f'Lendo {file_name}.{self.file_type}')
 
-        df = {}
+        df = pd.DataFrame()
 
-        if self.file_type == 'csv':
-            # ler csv
-            df = csv_to_df(
-                os.path.join(path, f'{file_name}.{self.file_type}'), data)
+        try:
+            if self.file_type == 'csv':
+                # ler csv
+                df = csv_to_df(
+                    os.path.join(path, f'{file_name}.{self.file_type}'), data)
 
-        elif self.file_type == 'json':
-            # ler json
-            df = json_to_df(os.path.join(
-                path, f'{file_name}.{self.file_type}'), data)
+            elif self.file_type == 'json':
+                # ler json
+                df = json_to_df(os.path.join(
+                    path, f'{file_name}.{self.file_type}'), data)
 
-        df = self.preprocess(df)
+            df = self.preprocess(df)
+        except pd.errors.EmptyDataError:
+            df = pd.DataFrame()
 
         return df
