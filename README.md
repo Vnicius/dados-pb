@@ -84,3 +84,5 @@ optional arguments:
 - doc - documento
 - dt - data
 - desc - descrição
+- org - organização
+- obs - observação
