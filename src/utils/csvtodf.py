@@ -17,7 +17,10 @@ def csv_to_df(file_name, csv_data):
 
     # salvar o arquivo
     with open(file_name, 'w', encoding='utf-8') as f:
-        f.write(csv_data.decode('utf-8'))
+        try:
+            f.write(csv_data.decode('utf-8'))
+        except UnicodeDecodeError:
+            f.write(csv_data.decode('latin-1'))
 
     # ler como dataframe
     df = pd.read_csv(file_name, sep=';')

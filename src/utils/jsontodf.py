@@ -18,8 +18,11 @@ def json_to_df(file_name, json_data):
 
     # salvar arquivo
     with open(file_name, 'w', encoding='utf-8') as f:
-        f.write(json_data.decode('utf-8'))
-
+        try:
+            f.write(json_data.decode('utf-8'))
+        except:
+            f.write(json_data.decode('latin-1'))
+            
     # ler arquivo como dataframe
     df = pd.read_json(file_name)
     
