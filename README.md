@@ -65,20 +65,20 @@ optional arguments:
 
 ```
   $ cd src
-  $ python run.py 2 2019
+  $ python run.py --month 2 --year 2019
 ```
 
 - 2 - Realizar o download dos documentos em `.json` referentes ao perído de 02/2018 a 02/2019
 
 ```
   $ cd src
-  $ python run.py 2 2018 --untilmonth 2 --untilyear 2019 -f json
+  $ python run.py --month 2 --year 2018 --untilmonth 2 --untilyear 2019 -f json
 ```
 
 ## Notações
 
 - un - Unidade
-- cd - Código
+- cod - Código
 - num - Número
 - tp - tipo
 - doc - documento
