@@ -41,6 +41,6 @@ if __name__ == '__main__':
     args = DownloadArgs().get_args()
 
     if not args.output:
-        args.output = "data_acao_governamental"
+        args.output = f'data_{FILE_NAME}'
 
     Download(args).download()

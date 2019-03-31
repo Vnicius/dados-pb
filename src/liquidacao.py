@@ -67,6 +67,6 @@ if __name__ == '__main__':
     args = DownloadArgs().get_args()
 
     if not args.output:
-        args.output = "data_liquidacao"
+        args.output = f'data_{FILE_NAME}'
 
     Download(args).download()
