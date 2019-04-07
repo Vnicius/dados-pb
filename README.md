@@ -21,10 +21,10 @@ Scripts para realizar o download dos dados abertos do estado da Paraíba dispon�
 
 ### Anaconda
 
-#### 1 - Criar o ambiente a partir do `env.yml`
+#### 1 - Criar o ambiente a partir do `environment.yml`
 
 ```
-  $ conda env create -f env.yml
+  $ conda env create -n dados-pb -f environment.yml
 ```
 
 #### 2 - Ativar o ambiente
@@ -64,15 +64,13 @@ optional arguments:
 - 1 - Realizar o download dos documentos em `.csv` referentes ao período de 02/2019
 
 ```
-  $ cd src
-  $ python run.py --month 2 --year 2019
+  $ python collect.py --month 2 --year 2019
 ```
 
 - 2 - Realizar o download dos documentos em `.json` referentes ao perído de 02/2018 a 02/2019
 
 ```
-  $ cd src
-  $ python run.py --month 2 --year 2018 --untilmonth 2 --untilyear 2019 -f json
+  $ python collect.py --month 2 --year 2018 --untilmonth 2 --untilyear 2019 -f json
 ```
 
 ## Notações
