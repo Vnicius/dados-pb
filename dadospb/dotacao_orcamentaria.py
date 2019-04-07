@@ -1,7 +1,7 @@
 from datetime import datetime as dt
-from utils.createdir import createdir
-from utils.TemplateDownload import TemplateDownload
-from utils.DownloadArgs import DownloadArgs
+from dadospb.utils.createdir import createdir
+from dadospb.utils.TemplateDownload import TemplateDownload
+from dadospb.utils.DownloadArgs import DownloadArgs
 
 BASE_URL = 'http://dados.pb.gov.br:80/get{}?nome=dotacao&exercicio={}&mes={}'
 FILE_NAME = 'dotacao_orcamentaria'
