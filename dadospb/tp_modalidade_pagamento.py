@@ -1,10 +1,10 @@
 from datetime import datetime as dt
 from dadospb.utils.createdir import createdir
 from dadospb.utils.TemplateDownload import TemplateDownload
-from dadospb.utils.DownloadArgs import DownloadArgs
 
 BASE_URL = 'http://dados.pb.gov.br:80/get{}?nome=tipo_modalidade_pagamento'
 FILE_NAME = 'tp_modalidade_pagamento'
+
 
 class Download(TemplateDownload):
     ''' Classe para realizar o download dos documentos de Dotação Orçamentária '''
@@ -22,7 +22,7 @@ class Download(TemplateDownload):
 
     def get_url(self, year, month):
         return BASE_URL.format(self.file_type)
-    
+
     def get_title(self):
         return 'Tipo Modalidade de Pagamento'
 
@@ -31,13 +31,3 @@ class Download(TemplateDownload):
             'codigo_modalidade': 'cod_modalidade',
             'descricao_modalidade': 'desc_modalidade'
         })
-
-
-if __name__ == '__main__':
-
-    args = DownloadArgs().get_args()
-
-    if not args.output:
-        args.output = f'data_{FILE_NAME}'
-
-    Download(args).download()

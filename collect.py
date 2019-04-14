@@ -17,7 +17,7 @@ def main(args):
 
     # buscar todos os arquivos .py
     files = glob.glob(path.join('dadospb', '*.py'))
-    files = list(get_files(files, args.scripts))
+    files = list(get_files(files, args.docs))
 
     # definir o diretôrio de saída
     if not args.output:

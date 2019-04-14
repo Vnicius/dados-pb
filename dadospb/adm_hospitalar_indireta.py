@@ -1,10 +1,10 @@
 from datetime import datetime as dt
 from dadospb.utils.createdir import createdir
 from dadospb.utils.TemplateDownload import TemplateDownload
-from dadospb.utils.DownloadArgs import DownloadArgs
 
 BASE_URL = 'http://dados.pb.gov.br:80/get{}?nome=pagamentos_gestao_pactuada_saude&exercicio={}&mes={}'
 FILE_NAME = 'adm_hospitalar_indireta'
+
 
 class Download(TemplateDownload):
     ''' Classe para realizar o download dos documentos de Dotação Orçamentária '''
@@ -26,7 +26,7 @@ class Download(TemplateDownload):
 
     def get_url(self, year, month):
         return BASE_URL.format(self.file_type, year, month)
-    
+
     def get_title(self):
         return 'Administração Hospitalar Indireta'
 
@@ -48,13 +48,3 @@ class Download(TemplateDownload):
             'VALOR_LANCAMENTO': 'valor_lancamento',
             'OBSERVACAO_LANCAMENTO': 'obs_lancamento',
         })
-
-
-if __name__ == '__main__':
-
-    args = DownloadArgs().get_args()
-
-    if not args.output:
-        args.output = f'data_{FILE_NAME}'
-
-    Download(args).download()

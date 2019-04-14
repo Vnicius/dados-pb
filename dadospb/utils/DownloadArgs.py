@@ -31,8 +31,8 @@ class DownloadArgs():
             '--db', help='gerar arquivo .db', action='store_true')
         parser.add_argument(
             '-o', '--output', help='diretório de saída', type=str, default='')
-        parser.add_argument('-s', '--scripts',
-                            help='lista de scripts para realizar o download', nargs='*', default=[])
+        parser.add_argument('-d', '--docs',
+                            help='lista de documentos para realizar o download', nargs='*', default=[])
         self.args = parser.parse_args()
 
     def get_args(self):

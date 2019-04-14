@@ -1,7 +1,6 @@
 from datetime import datetime as dt
 from dadospb.utils.createdir import createdir
 from dadospb.utils.TemplateDownload import TemplateDownload
-from dadospb.utils.DownloadArgs import DownloadArgs
 
 BASE_URL = 'http://dados.pb.gov.br:80/get{}?nome=pagamentos_gestao_pactuada_educacao&exercicio={}&mes={}'
 FILE_NAME = 'adm_escolar_indireta'
@@ -50,13 +49,3 @@ class Download(TemplateDownload):
             'NOME_ESCOLA': 'nome_escola',
             'MUNICIPIO_ESCOLA': 'municipio_escola'
         })
-
-
-if __name__ == '__main__':
-
-    args = DownloadArgs().get_args()
-
-    if not args.output:
-        args.output = f'data_{FILE_NAME}'
-
-    Download(args).download()
