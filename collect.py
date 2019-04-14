@@ -1,10 +1,11 @@
-import os
+from os import path
 import glob
 from datetime import datetime as dt
 from dadospb.utils.DownloadArgs import DownloadArgs
 import importlib
 
-IGNORE_FILES = [os.path.join('dadospb', '__init__.py')]
+IGNORE_FILES = ['__init__']
+
 
 def main(args):
     '''
@@ -15,9 +16,9 @@ def main(args):
     '''
 
     # buscar todos os arquivos .py
-    files = glob.glob(os.path.join('dadospb','*.py'))
-    files = [ f for f in files if not f in IGNORE_FILES ]
-    
+    files = glob.glob(path.join('dadospb', '*.py'))
+    files = list(get_files(files, args.scripts))
+
     # definir o diretôrio de saída
     if not args.output:
         args.output = f'data_{dt.now().strftime("%d-%m-%Y")}'
@@ -25,9 +26,29 @@ def main(args):
     # executar os scripts
     for f in files:
         module_name = f.replace('.py', '')
-        module_name = '.'.join(os.path.split(module_name))
+        module_name = '.'.join(path.split(module_name))
         module = importlib.import_module(module_name)
         module.Download(args).download()
+
+
+def get_files(files, priority_list=[]):
+    '''
+        Filtra os arquivos que serão baixados
+
+        Params:
+            files(list): lista com os arquivos
+            priority_list(list): lista com os arquivos prioritários
+    '''
+    for f in files:
+        file_name = path.split(f)[-1].replace('.py', '')
+
+        if priority_list:
+            if file_name in priority_list and\
+                    file_name not in IGNORE_FILES:
+                yield(f)
+        elif file_name not in IGNORE_FILES:
+            yield(f)
+
 
 if __name__ == '__main__':
     dargs = DownloadArgs()
