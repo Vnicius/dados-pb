@@ -31,7 +31,7 @@ def main(args):
         download_obj = module.Download(args)
 
         if args.list:
-            print(f'{download_obj.get_title()} - {module.FILE_NAME}')
+            print(f'- {download_obj.get_title()} - {module.FILE_NAME}')
         else:
             download_obj.download()
 
