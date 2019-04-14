@@ -17,7 +17,7 @@ def main(args):
 
     # buscar todos os arquivos .py
     files = glob.glob(path.join('dadospb', '*.py'))
-    files = list(get_files(files, args.docs))
+    files = sorted(list(get_files(files, args.docs)))
 
     # definir o diretôrio de saída
     if not args.output:
@@ -28,7 +28,12 @@ def main(args):
         module_name = f.replace('.py', '')
         module_name = '.'.join(path.split(module_name))
         module = importlib.import_module(module_name)
-        module.Download(args).download()
+        download_obj = module.Download(args)
+
+        if args.list:
+            print(f'{download_obj.get_title()} - {module.FILE_NAME}')
+        else:
+            download_obj.download()
 
 
 def get_files(files, priority_list=[]):

@@ -33,6 +33,8 @@ class DownloadArgs():
             '-o', '--output', help='diretório de saída', type=str, default='')
         parser.add_argument('-d', '--docs',
                             help='lista de documentos para realizar o download', nargs='*', default=[])
+        parser.add_argument(
+            '--list', help='listar todos os documentos', action='store_true')
         self.args = parser.parse_args()
 
     def get_args(self):
