@@ -31,6 +31,6 @@ class Download(TemplateDownload):
     def preprocess(self, df):
         return df.rename(columns={
             'EXERCICIO': 'exercicio',
-            'CODIGO_ACAO': 'cd_acao',
+            'CODIGO_ACAO': 'cod_acao',
             'NOME_ACAO': 'nome_acao'
         })
