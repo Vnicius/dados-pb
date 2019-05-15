@@ -1,9 +1,8 @@
-from datetime import datetime as dt
-from dadospb.utils.createdir import createdir
 from dadospb.utils.TemplateDownload import TemplateDownload
 
 BASE_URL = 'http://dados.pb.gov.br:80/get{}?nome=pagamentos_gestao_pactuada_educacao&exercicio={}&mes={}'
 FILE_NAME = 'adm_escolar_indireta'
+
 
 class Download(TemplateDownload):
     ''' Classe para realizar o download dos documentos de Dotação Orçamentária '''
@@ -25,7 +24,7 @@ class Download(TemplateDownload):
 
     def get_url(self, year, month):
         return BASE_URL.format(self.file_type, year, month)
-    
+
     def get_title(self):
         return 'Administração Escolar Indireta'
 

@@ -1,5 +1,3 @@
-from datetime import datetime as dt
-from dadospb.utils.createdir import createdir
 from dadospb.utils.TemplateDownload import TemplateDownload
 
 BASE_URL = 'http://dados.pb.gov.br:80/get{}?nome=elemento_despesa'
