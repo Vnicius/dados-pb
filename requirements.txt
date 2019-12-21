@@ -9,8 +9,6 @@ enum34==1.1.6
 halo==0.0.23
 idna==2.8
 log-symbols==0.0.12
-mkl-fft==1.0.10
-mkl-random==1.0.2
 numpy==1.16.2
 pandas==0.24.2
 pycparser==2.19

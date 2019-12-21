@@ -19,20 +19,6 @@ Scripts para realizar o download dos dados abertos do estado da Para√≠ba dispon√
   $ sudo pip install -r requirements.txt
 ```
 
-### Anaconda
-
-#### 1 - Criar o ambiente a partir do `environment.yml`
-
-```
-  $ conda env create -n dados-pb -f environment.yml
-```
-
-#### 2 - Ativar o ambiente
-
-```
-  $ conda activate dados-pb
-```
-
 ## Uso
 
 ```
