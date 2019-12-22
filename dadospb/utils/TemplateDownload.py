@@ -116,9 +116,11 @@ class TemplateDownload():
     def __fix_period(self):
         ''' Conserta os valores do período de consulta '''
 
-        # verifica se o perído final não foi definido
-        if self.end_year == 0 or self.end_month == 0:
+        # verifica se o perído final não foi definido        
+        if self.end_year == 0:
             self.end_year = self.start_year
+        
+        if self.end_month == 0 and not self.only_year:
             self.end_month = self.start_month
         
         # verifica se o período final é anterior ao inicial
