@@ -18,7 +18,8 @@ class Download(TemplateDownload):
         super(Download, self).__init__(base_url=BASE_URL, file_name=FILE_NAME,
                                        file_type=args.format, start_year=args.year,
                                        end_year=args.untilyear, output_dir=args.output,
-                                       periodic_data=True, only_year=True)
+                                       periodic_data=True, only_year=True,
+                                       merge_data=args.merge)
 
     def get_url(self, year, month):
         return BASE_URL.format(self.file_type, year)
