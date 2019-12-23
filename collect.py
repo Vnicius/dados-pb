@@ -1,8 +1,9 @@
 from os import path
 import glob
 from datetime import datetime as dt
+import json
 from dadospb.utils.DownloadArgs import DownloadArgs
-import importlib
+from dadospb.DataDownloader import DataDownloader
 
 IGNORE_FILES = ['__init__']
 
@@ -15,25 +16,27 @@ def main(args):
             args: argumentos
     '''
 
-    # buscar todos os arquivos .py
-    files = glob.glob(path.join('dadospb', '*.py'))
-    files = sorted(list(get_files(files, args.docs)))
-
     # definir o diretôrio de saída
     if not args.output:
         args.output = f'data_{dt.now().strftime("%d-%m-%Y")}'
 
-    # executar os scripts
-    for f in files:
-        module_name = f.replace('.py', '')
-        module_name = '.'.join(path.split(module_name))
-        module = importlib.import_module(module_name)
-        download_obj = module.Download(args)
+    
+    with open(path.abspath(path.join('.', 'data-config.json')), 'r', encoding='utf-8') as config_file:
+        database_config = json.load(config_file)
 
-        if args.list:
-            print(f'- {download_obj.get_title()} - {module.FILE_NAME}')
-        else:
-            download_obj.download()
+        # executar os scripts
+        for group in database_config:
+            if args.list:
+                print(group.upper())
+                
+            for data in database_config[group]:
+                if args.list:
+                    print(f'- {data["title"]} - {data["tag"]}')
+                else:
+                    if len(args.docs) > 0 and data['tag'] not in args.docs:
+                        continue
+                    
+                    DataDownloader(data, args).download()
 
 
 def get_files(files, priority_list=[]):
