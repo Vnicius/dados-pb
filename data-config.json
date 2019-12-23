@@ -1,0 +1,683 @@
+{
+  "cge": [
+    {
+      "title": "Dotação Orçamentária",
+      "tag": "dotacao_orcamentaria",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=dotacao&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "",
+      "columns": [
+        {
+          "name": "unidade_gestora",
+          "rename": "und_gestora"
+        },
+        {
+          "name": "exercicio",
+          "rename": "exercicio"
+        },
+        {
+          "name": "unidade_orcamentaria",
+          "rename": "und_orcamentaria"
+        },
+        {
+          "name": "funcao",
+          "rename": "funcao"
+        },
+        {
+          "name": "subfuncao",
+          "rename": "subfuncao"
+        },
+        {
+          "name": "programa",
+          "rename": "programa"
+        },
+        {
+          "name": "acao",
+          "rename": "acao"
+        },
+        {
+          "name": "meta",
+          "rename": "meta"
+        },
+        {
+          "name": "localidade",
+          "rename": "localidade"
+        },
+        {
+          "name": "categoria",
+          "rename": "categoria"
+        },
+        {
+          "name": "grupo_despesa",
+          "rename": "gp_depesa"
+        },
+        {
+          "name": "modalidade",
+          "rename": "modalidade"
+        },
+        {
+          "name": "elemento_despesa",
+          "rename": "elemento_despesa"
+        },
+        {
+          "name": "fonte_recurso",
+          "rename": "fonte_recurso"
+        },
+        {
+          "name": "valor_orcado",
+          "rename": "valor_orcado"
+        }
+      ]
+    },
+    {
+      "title": "Liquidação",
+      "tag": "liquidacao",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=liquidacao&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "",
+      "columns": [
+        {
+          "name": "NU_EXERCICIO",
+          "rename": "num_exercicio"
+        },
+        {
+          "name": "CD_ORGAO",
+          "rename": "cod_orgao"
+        },
+        {
+          "name": "NU_CLASSIFICACAO",
+          "rename": "num_classificacao"
+        },
+        {
+          "name": "CD_UNIDADE",
+          "rename": "cod_und"
+        },
+        {
+          "name": "CD_FUNCAO",
+          "rename": "cod_funcao"
+        },
+        {
+          "name": "CD_SUBFUNCAO",
+          "rename": "cod_subfuncao"
+        },
+        {
+          "name": "CD_PROGRAMA",
+          "rename": "cod_programa"
+        },
+        {
+          "name": "CD_PROJETO_ATIV",
+          "rename": "cod_projeto_ativ"
+        },
+        {
+          "name": "META",
+          "rename": "meta"
+        },
+        {
+          "name": "LOCALIDADE",
+          "rename": "localidade"
+        },
+        {
+          "name": "CD_NATUREZA",
+          "rename": "cod_natureza"
+        },
+        {
+          "name": "CD_FONTE",
+          "rename": "cod_fonte"
+        },
+        {
+          "name": "VALOR",
+          "rename": "valor"
+        },
+        {
+          "name": "NU_EMPENHO",
+          "rename": "num_empenho"
+        },
+        {
+          "name": "DOCUMENTO",
+          "rename": "doc"
+        },
+        {
+          "name": "TIPO_LIQUIDACAO",
+          "rename": "tp_liquidacao"
+        },
+        {
+          "name": "TIPO_DOC_FISCAL",
+          "rename": "tp_doc_fiscal"
+        },
+        {
+          "name": "NUM_NOTAFISCAL",
+          "rename": "num_notafiscal"
+        },
+        {
+          "name": "DATA_NF",
+          "rename": "dt_nf"
+        },
+        {
+          "name": "DATA_MOV",
+          "rename": "dt_mov"
+        },
+        {
+          "name": "DATA_PROC",
+          "rename": "dt_proc"
+        },
+        {
+          "name": "DATA_ATUALIZACAO",
+          "rename": "dt_atualizacao"
+        },
+        {
+          "name": "USUARIO",
+          "rename": "usuario"
+        },
+        {
+          "name": "DOCUMENTO_ORIGEM",
+          "rename": "doc_origem"
+        },
+        {
+          "name": "CD_INSC_RP",
+          "rename": "cod_insc_rp"
+        },
+        {
+          "name": "ANO_INSC_RP",
+          "rename": "ano_insc_rp"
+        },
+        {
+          "name": "ANO_DOC_ORIGEM_LD",
+          "rename": "ano_doc_origem_ld"
+        }
+      ]
+    },
+    {
+      "title": "Tipo Modalidade de Pagamento",
+      "tag": "tp_modalidade_pagamento",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=tipo_modalidade_pagamento",
+      "onlyYear": false,
+      "periodicData": false,
+      "description": "",
+      "columns": [
+        {
+          "name": "codigo_modalidade",
+          "rename": "cod_modalidade"
+        },
+        {
+          "name": "descricao_modalidade",
+          "rename": "desc_modalidade"
+        }
+      ]
+    }
+  ],
+  "dados-pb": [
+    {
+      "title": "Ação Governamental",
+      "tag": "acao_governamental",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=acao&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "Conjunto de operações, cujos resultados contribuem para os objetivos do programa governamental. A ação pode ser um projeto, atividade ou operação especial de atendimento à população.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_ACAO",
+          "rename": "cod_acao"
+        },
+        {
+          "name": "NOME_ACAO",
+          "rename": "nome_acao"
+        }
+      ]
+    },
+    {
+      "title": "Administração Escolar Indireta",
+      "tag": "adm_escolar_indireta",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=pagamentos_gestao_pactuada_educacao&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "Dados das Prestações de Contas das despesas realizadas pelas Organizações Sociais utilizando recursos oriundos dos repasses do Estado, conforme contrato de gestão pactuada de unidades de ensino estaduais",
+      "columns": [
+        {
+          "name": "CODIGO_ENVIO",
+          "rename": "cod_envio"
+        },
+        {
+          "name": "COMPETENCIA",
+          "rename": "competencia"
+        },
+        {
+          "name": "CODIGO_ORGANIZACAO_SOCIAL",
+          "rename": "cod_org_social"
+        },
+        {
+          "name": "NOME_ORGANIZACAO_SOCIAL",
+          "rename": "nome_org_social"
+        },
+        {
+          "name": "CODIGO_LANCAMENTO",
+          "rename": "cod_lancamento"
+        },
+        {
+          "name": "DATA_LANCAMENTO",
+          "rename": "dt_lancamento"
+        },
+        {
+          "name": "NUMERO_DOCUMENTO",
+          "rename": "num_doc"
+        },
+        {
+          "name": "TIPO_DOCUMENTO",
+          "rename": "tp_doc"
+        },
+        {
+          "name": "NUMERO_PROCESSO",
+          "rename": "num_processo"
+        },
+        {
+          "name": "CODIGO_CATEGORIA_DESPESA",
+          "rename": "cod_categoria_despesa"
+        },
+        {
+          "name": "NOME_CATEGORIA_DESPESA",
+          "rename": "nome_categoria_depesa"
+        },
+        {
+          "name": "CPFCNPJ_CREDOR",
+          "rename": "cpf_cnpj_credor"
+        },
+        {
+          "name": "NOME_CREDOR",
+          "rename": "nome_credor"
+        },
+        {
+          "name": "VALOR_LANCAMENTO",
+          "rename": "valor_lancamento"
+        },
+        {
+          "name": "OBSERVACAO_LANCAMENTO",
+          "rename": "obs_lancamento"
+        },
+        {
+          "name": "NOME_ESCOLA",
+          "rename": "nome_escola"
+        },
+        {
+          "name": "MUNICIPIO_ESCOLA",
+          "rename": "municipio_escola"
+        }
+      ]
+    },
+    {
+      "title": "Administração Hospitalar Indireta",
+      "tag": "adm_hospitalar_indireta",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=pagamentos_gestao_pactuada_saude&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "Dados das Prestações de Contas das despesas realizadas pelas Organizações Sociais utilizando recursos oriundos dos repasses do Estado, conforme contrato de gestão pactuada de unidades de saúde estaduais",
+      "columns": [
+        {
+          "name": "CODIGO_ENVIO",
+          "rename": "cod_envio"
+        },
+        {
+          "name": "COMPETENCIA",
+          "rename": "competencia"
+        },
+        {
+          "name": "CODIGO_ORGANIZACAO_SOCIAL",
+          "rename": "cod_org_social"
+        },
+        {
+          "name": "NOME_ORGANIZACAO_SOCIAL",
+          "rename": "nome_org_social"
+        },
+        {
+          "name": "CODIGO_LANCAMENTO",
+          "rename": "cod_lancamento"
+        },
+        {
+          "name": "DATA_LANCAMENTO",
+          "rename": "dt_lancamento"
+        },
+        {
+          "name": "NUMERO_DOCUMENTO",
+          "rename": "num_doc"
+        },
+        {
+          "name": "TIPO_DOCUMENTO",
+          "rename": "tp_doc"
+        },
+        {
+          "name": "NUMERO_PROCESSO",
+          "rename": "num_processo"
+        },
+        {
+          "name": "CODIGO_CATEGORIA_DESPESA",
+          "rename": "cod_categoria_despesa"
+        },
+        {
+          "name": "NOME_CATEGORIA_DESPESA",
+          "rename": "nome_categoria_depesa"
+        },
+        {
+          "name": "CPFCNPJ_CREDOR",
+          "rename": "cpf_cnpj_credor"
+        },
+        {
+          "name": "NOME_CREDOR",
+          "rename": "nome_credor"
+        },
+        {
+          "name": "VALOR_LANCAMENTO",
+          "rename": "valor_lancamento"
+        },
+        {
+          "name": "OBSERVACAO_LANCAMENTO",
+          "rename": "obs_lancamento"
+        }
+      ]
+    },
+    {
+      "title": "Categoria Econômica Despesa",
+      "tag": "categoria_economica_despesa",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=categoria_economica_despesa",
+      "onlyYear": false,
+      "periodicData": false,
+      "description": "Forma de classificação prevista inicialmente na Lei n.º 4.320/64, que compreende duas espécies: as despesas correntes as despesas de capital",
+      "columns": [
+        {
+          "name": "CODIGO_CATEGORIA_ECONOMICA_DESPESA",
+          "rename": "cod_categoria_economica_despesa"
+        },
+        {
+          "name": "NOME_CATEGORIA_ECONOMICA_DESPESA",
+          "rename": "nome_categoria_economica_despesa"
+        }
+      ]
+    },
+    {
+      "title": "Elemento da Despesa",
+      "tag": "elemento_despesa",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=elemento_despesa",
+      "onlyYear": false,
+      "periodicData": false,
+      "description": "Classificação da despesa orçamentária que tem por finalidade identificar os objetos de gasto de cada despesa, tais como vencimentos e vantagens fixas, juros, diárias, material de consumo, serviços de terceiros prestados sob qualquer forma, subvenções sociais, obras e instalações, equipamentos e material permanentes, auxílios, amortização e outros que a administração pública utiliza para a consecução de seus fins. (atualmente é regulamentada para todas as esferas de governo – federal, estadual e municipal - através do Anexo II da Portaria Interministerial MF/MPOG no 163, de 4 de maio 2001, D.O.U. 07.06. 2001).",
+      "columns": [
+        {
+          "name": "CODIGO_ELEMENTO_DESPESA",
+          "rename": "cod_elemento_despesa"
+        },
+        {
+          "name": "NOME_ELEMENTO_DESPESA",
+          "rename": "nome_elemento_despesa",
+          "breaked": true
+        }
+      ]
+    },
+    {
+      "title": "Fonte de Recurso",
+      "tag": "fonte_recurso",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=fonte_recurso&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "Classificação da receita segundo a destinação legal dos recursos arrecadados. As fontes de recursos constituem-se de determinados agrupamentos de naturezas de receitas, atendendo a uma determinada regra de destinação legal, e servem para indicar como são financiadas as despesas orçamentárias. Entende-se por fonte de recursos a origem ou a procedência dos recursos que devem ser gastos com uma determinada finalidade. É necessário, portanto, individualizar esses recursos de modo a evidenciar sua aplicação segundo a determinação legal.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_FONTE_RECURSO",
+          "rename": "cod_fonte_recurso"
+        },
+        {
+          "name": "NOME_FONTE_RECURSO",
+          "rename": "nome_fonte_recurso"
+        }
+      ]
+    },
+    {
+      "title": "Função",
+      "tag": "funcao",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=funcao&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "Classificação da despesa orçamentária que tem por objetivo registrar a finalidade da realização da despesa. A função pode ser traduzida como o maior nível de agregação das diversas áreas de atuação do setor público. Está relacionada com a missão institucional fundamental do órgão executor, por exemplo, cultura, educação, saúde ou defesa. A especificação das funções é fixada, em nível nacional, pela Portaria MPOG 42, de 14 de abril de 1999 (D.O.U. de 15.04.1999).",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_FUNCAO",
+          "rename": "cod_funcao"
+        },
+        {
+          "name": "NOME_FUNCAO",
+          "rename": "nome_funcao"
+        }
+      ]
+    },
+    {
+      "title": "Grupo Natureza de Despesa",
+      "tag": "gp_natureza_despesa",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=grupo_natureza_despesa",
+      "onlyYear": false,
+      "periodicData": false,
+      "description": "Classificação da despesa agregando elementos de despesa com as mesmas características quanto ao objeto de gasto, conforme discriminado a seguir: 1 - Pessoal e Encargos Sociais; 2 - Juros e Encargos da Dívida; 3 - Outras Despesas Correntes; 4 - Investimentos; 5 - Inversões Financeiras; 6 - Amortização da Dívida; e 9 - Reserva de Contingência.",
+      "columns": [
+        {
+          "name": "CODIGO_GRUPO_NATUREZA_DESPESA",
+          "rename": "cod_gp_natureza_despesa"
+        },
+        {
+          "name": "NOME_GRUPO_NATUREZA_DESPESA",
+          "rename": "nome_gp_natureza_despesa"
+        }
+      ]
+    },
+    {
+      "title": "Item da Despesa",
+      "tag": "item_despesa",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=item_despesa&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "Desmembramento dos elementos de despesa",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_NATUREZA_DESPESA",
+          "rename": "cod_natureza_despesa"
+        },
+        {
+          "name": "CODIGO_ITEM_DESPESA",
+          "rename": "cod_item_despesa"
+        },
+        {
+          "name": "NOME_ITEM_DESPESA",
+          "rename": "nome_item_despesa"
+        }
+      ]
+    },
+    {
+      "title": "Modalidade Aplicação Despesa",
+      "tag": "modalidade_aplicacao_despesa",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=modalidade_aplicacao_despesa",
+      "onlyYear": false,
+      "periodicData": false,
+      "description": "Um dos componentes da classificação da despesa que indica como os recursos serão aplicados, podendo ser: I - mediante transferência financeira: a) a outras esferas de governo, seus órgãos, fundos ou entidades; b) a entidades privadas sem fins lucrativos e outras instituições; II - diretamente pela unidade detentora do crédito orçamentário, ou por outro órgão ou entidade no âmbito do mesmo nível de Governo. Nas leis orçamentárias a especificação da modalidade observa, no mínimo, o seguinte detalhamento: I - governo estadual – modalidade 30; II - administração municipal - 40; III - entidade privada sem fins lucrativos - 50; IV - consórcios públicos - 71; V - aplicação direta - 90; VI - aplicação direta decorrente de operação entre órgãos, fundos e entidades integrantes dos Orçamentos Fiscal e da Seguridade Social - 91.",
+      "columns": [
+        {
+          "name": "CODIGO_MODALIDADE_APLICACAO_DESPESA",
+          "rename": "cod_modalidade_aplicacao_despesa"
+        },
+        {
+          "name": "NOME_MODALIDADE_APLICACAO_DESPESA",
+          "rename": "nome_modalidade_aplicacao_despesa"
+        }
+      ]
+    },
+    {
+      "title": "Modalidade de Licitação",
+      "tag": "modalidade_licitacao",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=modalidade_licitacao&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "Um dos componentes da classificação da despesa que indica como os recursos serão aplicados, podendo ser: I - mediante transferência financeira: a) a outras esferas de governo, seus órgãos, fundos ou entidades; b) a entidades privadas sem fins lucrativos e outras instituições; II - diretamente pela unidade detentora do crédito orçamentário, ou por outro órgão ou entidade no âmbito do mesmo nível de Governo. Nas leis orçamentárias a especificação da modalidade observa, no mínimo, o seguinte detalhamento: I - governo estadual – modalidade 30; II - administração municipal - 40; III - entidade privada sem fins lucrativos - 50; IV - consórcios públicos - 71; V - aplicação direta - 90; VI - aplicação direta decorrente de operação entre órgãos, fundos e entidades integrantes dos Orçamentos Fiscal e da Seguridade Social - 91.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_MODALIDADE_LICITACAO",
+          "rename": "cod_modalidade_licitacao"
+        },
+        {
+          "name": "NOME_MODALIDADE_LICITACAO",
+          "rename": "nome_modalidade_licitacao"
+        }
+      ]
+    },
+    {
+      "title": "Motivo da Dispensa de Licitação",
+      "tag": "motivo_dispensa_licitacao",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=dispensa_licitacao&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "Classificação de processos de aquisição de bens e serviços pelo dispositivo legal que fundamenta a dispensa/inexigibilidade da licitação.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_MOTIVO_DISPENSA_LICITACAO",
+          "rename": "cod_motivo_dispensa_licitacao"
+        },
+        {
+          "name": "DESCRICAO_MOTIVO_DISPENSA_LICITACAO",
+          "rename": "desc_motivo_dispensa_licitacao"
+        }
+      ]
+    },
+    {
+      "title": "Programas",
+      "tag": "programas",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=programa_dadospb&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "São políticas públicas, principal instrumento que os governos utilizam para promover a integração entre os entes e os setores para otimizar seus recursos, sejam eles financeiros, humanos, logísticos ou materiais",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_PROGRAMA",
+          "rename": "cod_programa"
+        },
+        {
+          "name": "NOME_PROGRAMA",
+          "rename": "nome_programa"
+        }
+      ]
+    },
+    {
+      "title": "Subfunção",
+      "tag": "subfuncao",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=subfuncao_dadospb&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "A subfunção representa uma partição da função, visando agregar determinado subconjunto de despesa do setor público.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_SUBFUNCAO",
+          "rename": "cod_subfuncao"
+        },
+        {
+          "name": "NOME_SUBFUNCAO",
+          "rename": "nome_subfuncao"
+        }
+      ]
+    },
+    {
+      "title": "Tipos de Orçamentos",
+      "tag": "tipos_orcamento",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=tipos_de_orcamento",
+      "onlyYear": false,
+      "periodicData": false,
+      "description": "",
+      "columns": [
+        {
+          "name": "CD_TIPO_ORCAMENTO",
+          "rename": "cod_tipo_orcamento"
+        },
+        {
+          "name": "DS_TIPO_ORCAMENTO",
+          "rename": "desc_tipo_orcamento"
+        }
+      ]
+    },
+    {
+      "title": "Unidade Gestora",
+      "tag": "und_gestora",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=unidade_gestora_dadospb&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "Unidade orçamentária ou administrativa investida do poder de gerir recursos orçamentários e financeiros, próprios ou sob descentralização.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_UNIDADE_GESTORA",
+          "rename": "cod_und_gestora"
+        },
+        {
+          "name": "SIGLA_UNIDADE_GESTORA",
+          "rename": "sigla_und_gestora"
+        },
+        {
+          "name": "NOME_UNIDADE_GESTORA",
+          "rename": "nome_und_gestora"
+        },
+        {
+          "name": "TIPO_ADMINISTRACAO_UNIDADE_GESTORA",
+          "rename": "tp_adm_und_gestora"
+        }
+      ]
+    },
+    {
+      "title": "Unidade Orçamentária",
+      "tag": "und_orcamentaria",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=unidade_orcamentaria_dadospb&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "É a repartição da Administração Federal a quem o orçamento da União consigna dotações específicas para a realização de seus programas de trabalho.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_UNIDADE_ORCAMENTARIA",
+          "rename": "cod_und_orcamentaria"
+        },
+        {
+          "name": "NOME_UNIDADE_ORCAMENTARIA",
+          "rename": "nome_und_orcamentaria"
+        }
+      ]
+    }
+  ]
+}
