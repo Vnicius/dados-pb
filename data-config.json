@@ -679,5 +679,69 @@
         }
       ]
     }
+  ],
+  "fopag": [
+    {
+      "title": "Resumo da Folha de Pagamento",
+      "tag": "resumo_folha_pagamento",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=resumo_folha&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "Extrato da folha de pagamento do Estado da Paraíba",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "MES",
+          "rename": "mes"
+        },
+        {
+          "name": "QUADRO",
+          "rename": "quadro"
+        },
+        {
+          "name": "PODER",
+          "rename": "poder"
+        },
+        {
+          "name": "ADMINISTRACAO",
+          "rename": "administracao"
+        },
+        {
+          "name": "ORGAO",
+          "rename": "orgao"
+        },
+        {
+          "name": "SECRETARIA",
+          "rename": "secretaria"
+        },
+        {
+          "name": "UNIDADE_TRABALHO",
+          "rename": "und_trabalho"
+        },
+        {
+          "name": "NOME_MUNICIPIO",
+          "rename": "nome_municipio"
+        },
+        {
+          "name": "GRUPO",
+          "rename": "grupo"
+        },
+        {
+          "name": "REGIME",
+          "rename": "regime"
+        },
+        {
+          "name": "QUANTIDADE",
+          "rename": "quantidade"
+        },
+        {
+          "name": "SOMA_SALARIO_BRUTO",
+          "rename": "soma_salario_bruto"
+        }
+      ]
+    }
   ]
 }
