@@ -743,5 +743,169 @@
         }
       ]
     }
+  ],
+  "siaf": [
+    {
+      "title": "Despesa Orçamentária: Notas de Empenho",
+      "tag": "despesa_orcamentaria_notas_empenho",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=empenho_original&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "Atos emanados de autoridade competente que cria a obrigação de pagamento. O empenho, que consiste na reserva de dotação orçamentária para um fim específico, é formalizado mediante a emissão de um documento denominado Nota de Empenho, do qual deve constar o credor e a importância da despesa, bem como os demais dados necessários ao controle da execução orçamentária.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_UNIDADE_GESTORA",
+          "rename": "cod_und_gestora"
+        },
+        {
+          "name": "NUMERO_EMPENHO",
+          "rename": "num_empenho"
+        },
+        {
+          "name": "NUMERO_EMPENHO_ORIGEM",
+          "rename": "num_empenho_origem"
+        },
+        {
+          "name": "DATA_EMPENHO",
+          "rename": "dt_empenho"
+        },
+        {
+          "name": "HISTORICO_EMPENHO",
+          "rename": "historico_empenho"
+        },
+        {
+          "name": "CODIGO_SITUACAO_EMPENHO",
+          "rename": "cod_situacao_empenho"
+        },
+        {
+          "name": "NOME_SITUACAO_EMPENHO",
+          "rename": "nome_situacao_empenho"
+        },
+        {
+          "name": "CODIGO_TIPO_EMPENHO",
+          "rename": "cod_tp_empenho"
+        },
+        {
+          "name": "DESCRICAO_TIPO_EMPENHO",
+          "rename": "desc_tp_empenho"
+        },
+        {
+          "name": "VALOR_EMPENHO",
+          "rename": "valor_empenho"
+        },
+        {
+          "name": "CODIGO_MODALIDADE_LICITACAO",
+          "rename": "cod_modalidade_licitacao"
+        },
+        {
+          "name": "CODIGO_MOTIVO_DISPENSA_LICITACAO",
+          "rename": "cod_motivo_dispensa_licitacao"
+        },
+        {
+          "name": "CODIGO_TIPO_CREDITO",
+          "rename": "cod_tp_credito"
+        },
+        {
+          "name": "NOME_TIPO_CREDITO",
+          "rename": "nome_tp_credito"
+        },
+        {
+          "name": "DESTINO_DIARIAS",
+          "rename": "destino_diarias",
+          "breaked": true
+        },
+        {
+          "name": "DATA_SAIDA_DIARIAS",
+          "rename": "dt_saida_diarias"
+        },
+        {
+          "name": "DATA_CHEGADA_DIARIAS",
+          "rename": "dt_chegada_diarias"
+        },
+        {
+          "name": "NOME_CREDOR",
+          "rename": "nome_credor",
+          "breaked": true
+        },
+        {
+          "name": "CPFCNPJ_CREDOR",
+          "rename": "cpf_cnpj_credor"
+        },
+        {
+          "name": "TIPO_CREDOR",
+          "rename": "tipo_credor"
+        },
+        {
+          "name": "CODIGO_MUNICIPIO",
+          "rename": "cod_municipio"
+        },
+        {
+          "name": "NOME_MUNICIPIO",
+          "rename": "nome_municipio"
+        },
+        {
+          "name": "NUMERO_PROCESSO_PAGAMENTO",
+          "rename": "num_processo_pagamento",
+          "breaked": true
+        },
+        {
+          "name": "NUMERO_CONTRATO",
+          "rename": "num_contrato",
+          "breaked": true
+        },
+        {
+          "name": "CODIGO_UNIDADE_ORCAMENTARIA",
+          "rename": "cod_und_orcamentaria"
+        },
+        {
+          "name": "CODIGO_FUNCAO",
+          "rename": "cod_funcao"
+        },
+        {
+          "name": "CODIGO_SUBFUNCAO",
+          "rename": "cod_subfuncao"
+        },
+        {
+          "name": "CODIGO_PROGRAMA",
+          "rename": "cod_programa"
+        },
+        {
+          "name": "CODIGO_ACAO",
+          "rename": "cod_acao"
+        },
+        {
+          "name": "CODIGO_FONTE_RECURSO",
+          "rename": "cod_fonte_recurso"
+        },
+        {
+          "name": "CODIGO_NATUREZA_DESPESA",
+          "rename": "cod_natureza_despesa"
+        },
+        {
+          "name": "CODIGO_CATEGORIA_ECONOMICA_DESPESA",
+          "rename": "cod_categoria_economica_despesa"
+        },
+        {
+          "name": "CODIGO_GRUPO_NATUREZA_DESPESA",
+          "rename": "cod_gp_natureza_despesa"
+        },
+        {
+          "name": "CODIGO_MODALIDADE_APLICACAO_DESPESA",
+          "rename": "cod_modalidade_aplicacao_despesa"
+        },
+        {
+          "name": "CODIGO_ELEMENTO_DESPESA",
+          "rename": "cod_elemento_despesa"
+        },
+        {
+          "name": "CODIGO_ITEM_DESPESA",
+          "rename": "cod_item_despesa"
+        }
+      ]
+    }
   ]
 }
