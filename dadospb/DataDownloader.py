@@ -1,3 +1,4 @@
+import re
 from dadospb.utils.TemplateDownload import TemplateDownload
 
 BASE_URL = 'http://dados.pb.gov.br:80/get{}?nome=acao&exercicio={}'
@@ -32,15 +33,14 @@ class DataDownloader(TemplateDownload):
 
         for column in self.data_config['columns']:
             if ('breaked' in column) and (column['breaked']) :
-                df[column['name']] = df[column['name']].apply(lambda x: x.replace('\n', ''))
+                df[column['name']] = df[column['name']].apply(self.__fix_breaked_data)
 
-        return df.rename(columns=self.__get_columns_rename())
+        return df.rename(columns={column["name"] : column["rename"] for column in self.data_config["columns"]})
     
-    def __get_columns_rename(self):
-        renames = {}
-
-        for column in self.data_config["columns"]:
-            renames[column["name"]] = column["rename"]
+    def __fix_breaked_data(self, item):
         
-        return renames
+        if item == item:
+            return re.sub(r'\s+$', '', item)
+        
+        return item
 
