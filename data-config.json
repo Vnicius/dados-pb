@@ -1695,6 +1695,24 @@
           "rename": "desc"
         }
       ]
+    },
+    {
+      "title": "Tipo de Movimentação Orçamentária",
+      "tag": "tp_movimentacao_orcamentaria",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=tipo_movimentacao_orcamentaria",
+      "onlyYear": false,
+      "periodicData": false,
+      "description": "",
+      "columns": [
+        {
+          "name": "CODIGO",
+          "rename": "cod"
+        },
+        {
+          "name": "DESCRICAO",
+          "rename": "desc"
+        }
+      ]
     }
   ]
 }
