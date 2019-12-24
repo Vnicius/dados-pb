@@ -1659,6 +1659,24 @@
           "rename": "cod_subalinea_receita"
         }
       ]
+    },
+    {
+      "title": "Situação Empenho",
+      "tag": "situacao_empenho",
+      "baseURL": "http://dados.pb.gov.br:80/getcsv?nome=situacao_empenho",
+      "onlyYear": false,
+      "periodicData": false,
+      "description": "",
+      "columns": [
+        {
+          "name": "CODIGO",
+          "rename": "cod"
+        },
+        {
+          "name": "DESCRICAO",
+          "rename": "desc"
+        }
+      ]
     }
   ]
 }
