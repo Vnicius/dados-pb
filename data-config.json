@@ -1394,7 +1394,7 @@
       ]
     },
     {
-      "title": "Despesas - Anulações de Autorização de Pagamento",
+      "title": "Despesas: Anulações de Autorização de Pagamento",
       "tag": "anulacoes_pagamento",
       "baseURL": "http://dados.pb.gov.br:80/get{}?nome=pagamento_anulacao&exercicio={}&mes={}",
       "onlyYear": false,
@@ -1432,6 +1432,64 @@
         {
           "name": "VALOR_DOCUMENTO",
           "rename": "valor_doc"
+        },
+        {
+          "name": "CODIGO_TIPO_DOCUMENTO",
+          "rename": "cod_tp_doc"
+        },
+        {
+          "name": "DESCRICAO_TIPO_DOCUMENTO",
+          "rename": "desc_tp_doc"
+        },
+        {
+          "name": "NOME_CREDOR",
+          "rename": "nome_credor"
+        },
+        {
+          "name": "CPFCNPJ_CREDOR",
+          "rename": "cpf_cnpj_credor"
+        },
+        {
+          "name": "TIPO_CREDOR",
+          "rename": "tp_credor"
+        }
+      ]
+    },
+    {
+      "title": "Despesas: Autorizações de Pagamento",
+      "tag": "autorizacoes_pagamento",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=pagamento&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "Registros dos pagamentos de compromissos, bem como transferências de recursos entre UGs, liberação de recursos para fins de adiantamento, suprimento de fundos, cota, repasse, sub-repasse e afins.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_UNIDADE_GESTORA",
+          "rename": "cod_und_gestora"
+        },
+        {
+          "name": "NUMERO_EMPENHO",
+          "rename": "num_empenho"
+        },
+        {
+          "name": "NUMERO_AUTORIZACAO_PAGAMENTO",
+          "rename": "num_autorizacao_pagamento"
+        },
+        {
+          "name": "TIPO_DESPESA",
+          "rename": "tp_despesa"
+        },
+        {
+          "name": "DATA_PAGAMENTO",
+          "rename": "dt_pagamento"
+        },
+        {
+          "name": "VALOR_PAGAMENTO",
+          "rename": "valor_pagamento"
         },
         {
           "name": "CODIGO_TIPO_DOCUMENTO",
