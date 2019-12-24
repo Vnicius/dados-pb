@@ -1597,6 +1597,68 @@
           "rename": "cod_subalinea_receita"
         }
       ]
+    },
+    {
+      "title": "Receitas: Previsão",
+      "tag": "receitas_previsao",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=receitas_previsao&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "Previsão dos recursos a serem arrecadados na gestão e computados na apuração do resultado do exercício, desdobrados nas categorias econômicas de correntes e de capital.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "MES",
+          "rename": "mes"
+        },
+        {
+          "name": "CODIGO_UNIDADE_GESTORA",
+          "rename": "cod_und_gestora"
+        },
+        {
+          "name": "CODIGO_ITEM_RECEITA",
+          "rename": "cod_item_receita"
+        },
+        {
+          "name": "NOME_ITEM_RECEITA",
+          "rename": "nome_item_receita"
+        },
+        {
+          "name": "CODIGO_FONTE_RECURSO",
+          "rename": "code_fonte_recurso"
+        },
+        {
+          "name": "VALOR_PREVISAO_EXERCICIO",
+          "rename": "valor_previsao_exercicio"
+        },
+        {
+          "name": "CODIGO_CATEGORIA_RECEITA",
+          "rename": "cod_categoria_receita"
+        },
+        {
+          "name": "CODIGO_ORIGEM_RECEITA",
+          "rename": "cod_origem_receita"
+        },
+        {
+          "name": "CODIGO_ESPECIE_RECEITA",
+          "rename": "cod_especie_receita"
+        },
+        {
+          "name": "CODIGO_RUBRICA_RECEITA",
+          "rename": "cod_rubrica_receita"
+        },
+        {
+          "name": "CODIGO_ALINEA_RECEITA",
+          "rename": "cod_alinea_receita"
+        },
+        {
+          "name": "CODIGO_SUBALINEA_RECEITA",
+          "rename": "cod_subalinea_receita"
+        }
+      ]
     }
   ]
 }
