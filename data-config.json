@@ -743,5 +743,994 @@
         }
       ]
     }
+  ],
+  "siaf": [
+    {
+      "title": "Despesa Orçamentária: Notas de Empenho",
+      "tag": "notas_empenho",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=empenho_original&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "Atos emanados de autoridade competente que cria a obrigação de pagamento. O empenho, que consiste na reserva de dotação orçamentária para um fim específico, é formalizado mediante a emissão de um documento denominado Nota de Empenho, do qual deve constar o credor e a importância da despesa, bem como os demais dados necessários ao controle da execução orçamentária.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_UNIDADE_GESTORA",
+          "rename": "cod_und_gestora"
+        },
+        {
+          "name": "NUMERO_EMPENHO",
+          "rename": "num_empenho"
+        },
+        {
+          "name": "NUMERO_EMPENHO_ORIGEM",
+          "rename": "num_empenho_origem"
+        },
+        {
+          "name": "DATA_EMPENHO",
+          "rename": "dt_empenho"
+        },
+        {
+          "name": "HISTORICO_EMPENHO",
+          "rename": "historico_empenho"
+        },
+        {
+          "name": "CODIGO_SITUACAO_EMPENHO",
+          "rename": "cod_situacao_empenho"
+        },
+        {
+          "name": "NOME_SITUACAO_EMPENHO",
+          "rename": "nome_situacao_empenho"
+        },
+        {
+          "name": "CODIGO_TIPO_EMPENHO",
+          "rename": "cod_tp_empenho"
+        },
+        {
+          "name": "DESCRICAO_TIPO_EMPENHO",
+          "rename": "desc_tp_empenho"
+        },
+        {
+          "name": "VALOR_EMPENHO",
+          "rename": "valor_empenho"
+        },
+        {
+          "name": "CODIGO_MODALIDADE_LICITACAO",
+          "rename": "cod_modalidade_licitacao"
+        },
+        {
+          "name": "CODIGO_MOTIVO_DISPENSA_LICITACAO",
+          "rename": "cod_motivo_dispensa_licitacao"
+        },
+        {
+          "name": "CODIGO_TIPO_CREDITO",
+          "rename": "cod_tp_credito"
+        },
+        {
+          "name": "NOME_TIPO_CREDITO",
+          "rename": "nome_tp_credito"
+        },
+        {
+          "name": "DESTINO_DIARIAS",
+          "rename": "destino_diarias",
+          "breaked": true
+        },
+        {
+          "name": "DATA_SAIDA_DIARIAS",
+          "rename": "dt_saida_diarias"
+        },
+        {
+          "name": "DATA_CHEGADA_DIARIAS",
+          "rename": "dt_chegada_diarias"
+        },
+        {
+          "name": "NOME_CREDOR",
+          "rename": "nome_credor",
+          "breaked": true
+        },
+        {
+          "name": "CPFCNPJ_CREDOR",
+          "rename": "cpf_cnpj_credor"
+        },
+        {
+          "name": "TIPO_CREDOR",
+          "rename": "tipo_credor"
+        },
+        {
+          "name": "CODIGO_MUNICIPIO",
+          "rename": "cod_municipio"
+        },
+        {
+          "name": "NOME_MUNICIPIO",
+          "rename": "nome_municipio"
+        },
+        {
+          "name": "NUMERO_PROCESSO_PAGAMENTO",
+          "rename": "num_processo_pagamento",
+          "breaked": true
+        },
+        {
+          "name": "NUMERO_CONTRATO",
+          "rename": "num_contrato",
+          "breaked": true
+        },
+        {
+          "name": "CODIGO_UNIDADE_ORCAMENTARIA",
+          "rename": "cod_und_orcamentaria"
+        },
+        {
+          "name": "CODIGO_FUNCAO",
+          "rename": "cod_funcao"
+        },
+        {
+          "name": "CODIGO_SUBFUNCAO",
+          "rename": "cod_subfuncao"
+        },
+        {
+          "name": "CODIGO_PROGRAMA",
+          "rename": "cod_programa"
+        },
+        {
+          "name": "CODIGO_ACAO",
+          "rename": "cod_acao"
+        },
+        {
+          "name": "CODIGO_FONTE_RECURSO",
+          "rename": "cod_fonte_recurso"
+        },
+        {
+          "name": "CODIGO_NATUREZA_DESPESA",
+          "rename": "cod_natureza_despesa"
+        },
+        {
+          "name": "CODIGO_CATEGORIA_ECONOMICA_DESPESA",
+          "rename": "cod_categoria_economica_despesa"
+        },
+        {
+          "name": "CODIGO_GRUPO_NATUREZA_DESPESA",
+          "rename": "cod_gp_natureza_despesa"
+        },
+        {
+          "name": "CODIGO_MODALIDADE_APLICACAO_DESPESA",
+          "rename": "cod_modalidade_aplicacao_despesa"
+        },
+        {
+          "name": "CODIGO_ELEMENTO_DESPESA",
+          "rename": "cod_elemento_despesa"
+        },
+        {
+          "name": "CODIGO_ITEM_DESPESA",
+          "rename": "cod_item_despesa"
+        }
+      ]
+    },
+    {
+      "title": "Despesa Orçamentária: Notas de Empenho de Anulação",
+      "tag": "notas_empenho_anulacao",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=empenho_anulacao&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "Atos emanados de autoridade competente que cria a obrigação de pagamento. O empenho, que consiste na reserva de dotação orçamentária para um fim específico, é formalizado mediante a emissão de um documento denominado Nota de Empenho, do qual deve constar o credor e a importância da despesa, bem como os demais dados necessários ao controle da execução orçamentária.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_UNIDADE_GESTORA",
+          "rename": "cod_und_gestora"
+        },
+        {
+          "name": "NUMERO_EMPENHO",
+          "rename": "num_empenho"
+        },
+        {
+          "name": "NUMERO_EMPENHO_ORIGEM",
+          "rename": "num_empenho_origem"
+        },
+        {
+          "name": "DATA_EMPENHO",
+          "rename": "dt_empenho"
+        },
+        {
+          "name": "HISTORICO_EMPENHO",
+          "rename": "historico_empenho"
+        },
+        {
+          "name": "CODIGO_SITUACAO_EMPENHO",
+          "rename": "cod_situacao_empenho"
+        },
+        {
+          "name": "NOME_SITUACAO_EMPENHO",
+          "rename": "nome_situacao_empenho"
+        },
+        {
+          "name": "CODIGO_TIPO_EMPENHO",
+          "rename": "cod_tp_empenho"
+        },
+        {
+          "name": "DESCRICAO_TIPO_EMPENHO",
+          "rename": "desc_tp_empenho"
+        },
+        {
+          "name": "VALOR_EMPENHO",
+          "rename": "valor_empenho"
+        },
+        {
+          "name": "CODIGO_MODALIDADE_LICITACAO",
+          "rename": "cod_modalidade_licitacao"
+        },
+        {
+          "name": "CODIGO_MOTIVO_DISPENSA_LICITACAO",
+          "rename": "cod_motivo_dispensa_licitacao"
+        },
+        {
+          "name": "CODIGO_TIPO_CREDITO",
+          "rename": "cod_tp_credito"
+        },
+        {
+          "name": "NOME_TIPO_CREDITO",
+          "rename": "nome_tp_credito"
+        },
+        {
+          "name": "DESTINO_DIARIAS",
+          "rename": "destino_diarias",
+          "breaked": true
+        },
+        {
+          "name": "DATA_SAIDA_DIARIAS",
+          "rename": "dt_saida_diarias"
+        },
+        {
+          "name": "DATA_CHEGADA_DIARIAS",
+          "rename": "dt_chegada_diarias"
+        },
+        {
+          "name": "NOME_CREDOR",
+          "rename": "nome_credor",
+          "breaked": true
+        },
+        {
+          "name": "CPFCNPJ_CREDOR",
+          "rename": "cpf_cnpj_credor"
+        },
+        {
+          "name": "TIPO_CREDOR",
+          "rename": "tipo_credor"
+        },
+        {
+          "name": "CODIGO_MUNICIPIO",
+          "rename": "cod_municipio"
+        },
+        {
+          "name": "NOME_MUNICIPIO",
+          "rename": "nome_municipio"
+        },
+        {
+          "name": "NUMERO_PROCESSO_PAGAMENTO",
+          "rename": "num_processo_pagamento",
+          "breaked": true
+        },
+        {
+          "name": "NUMERO_CONTRATO",
+          "rename": "num_contrato",
+          "breaked": true
+        },
+        {
+          "name": "CODIGO_UNIDADE_ORCAMENTARIA",
+          "rename": "cod_und_orcamentaria"
+        },
+        {
+          "name": "CODIGO_FUNCAO",
+          "rename": "cod_funcao"
+        },
+        {
+          "name": "CODIGO_SUBFUNCAO",
+          "rename": "cod_subfuncao"
+        },
+        {
+          "name": "CODIGO_PROGRAMA",
+          "rename": "cod_programa"
+        },
+        {
+          "name": "CODIGO_ACAO",
+          "rename": "cod_acao"
+        },
+        {
+          "name": "CODIGO_FONTE_RECURSO",
+          "rename": "cod_fonte_recurso"
+        },
+        {
+          "name": "CODIGO_NATUREZA_DESPESA",
+          "rename": "cod_natureza_despesa"
+        },
+        {
+          "name": "CODIGO_CATEGORIA_ECONOMICA_DESPESA",
+          "rename": "cod_categoria_economica_despesa"
+        },
+        {
+          "name": "CODIGO_GRUPO_NATUREZA_DESPESA",
+          "rename": "cod_gp_natureza_despesa"
+        },
+        {
+          "name": "CODIGO_MODALIDADE_APLICACAO_DESPESA",
+          "rename": "cod_modalidade_aplicacao_despesa"
+        },
+        {
+          "name": "CODIGO_ELEMENTO_DESPESA",
+          "rename": "cod_elemento_despesa"
+        },
+        {
+          "name": "CODIGO_ITEM_DESPESA",
+          "rename": "cod_item_despesa"
+        }
+      ]
+    },
+    {
+      "title": "Despesa Orçamentária: Notas de Empenho de Suplementação",
+      "tag": "notas_empenho_suplementacao",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=empenho_suplementacao&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "Atos emanados de autoridade competente que cria a obrigação de pagamento. O empenho, que consiste na reserva de dotação orçamentária para um fim específico, é formalizado mediante a emissão de um documento denominado Nota de Empenho, do qual deve constar o credor e a importância da despesa, bem como os demais dados necessários ao controle da execução orçamentária.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_UNIDADE_GESTORA",
+          "rename": "cod_und_gestora"
+        },
+        {
+          "name": "NUMERO_EMPENHO",
+          "rename": "num_empenho"
+        },
+        {
+          "name": "NUMERO_EMPENHO_ORIGEM",
+          "rename": "num_empenho_origem"
+        },
+        {
+          "name": "DATA_EMPENHO",
+          "rename": "dt_empenho"
+        },
+        {
+          "name": "HISTORICO_EMPENHO",
+          "rename": "historico_empenho"
+        },
+        {
+          "name": "CODIGO_SITUACAO_EMPENHO",
+          "rename": "cod_situacao_empenho"
+        },
+        {
+          "name": "NOME_SITUACAO_EMPENHO",
+          "rename": "nome_situacao_empenho"
+        },
+        {
+          "name": "CODIGO_TIPO_EMPENHO",
+          "rename": "cod_tp_empenho"
+        },
+        {
+          "name": "DESCRICAO_TIPO_EMPENHO",
+          "rename": "desc_tp_empenho"
+        },
+        {
+          "name": "VALOR_EMPENHO",
+          "rename": "valor_empenho"
+        },
+        {
+          "name": "CODIGO_MODALIDADE_LICITACAO",
+          "rename": "cod_modalidade_licitacao"
+        },
+        {
+          "name": "CODIGO_MOTIVO_DISPENSA_LICITACAO",
+          "rename": "cod_motivo_dispensa_licitacao"
+        },
+        {
+          "name": "CODIGO_TIPO_CREDITO",
+          "rename": "cod_tp_credito"
+        },
+        {
+          "name": "NOME_TIPO_CREDITO",
+          "rename": "nome_tp_credito"
+        },
+        {
+          "name": "DESTINO_DIARIAS",
+          "rename": "destino_diarias",
+          "breaked": true
+        },
+        {
+          "name": "DATA_SAIDA_DIARIAS",
+          "rename": "dt_saida_diarias"
+        },
+        {
+          "name": "DATA_CHEGADA_DIARIAS",
+          "rename": "dt_chegada_diarias"
+        },
+        {
+          "name": "NOME_CREDOR",
+          "rename": "nome_credor",
+          "breaked": true
+        },
+        {
+          "name": "CPFCNPJ_CREDOR",
+          "rename": "cpf_cnpj_credor"
+        },
+        {
+          "name": "TIPO_CREDOR",
+          "rename": "tipo_credor"
+        },
+        {
+          "name": "CODIGO_MUNICIPIO",
+          "rename": "cod_municipio"
+        },
+        {
+          "name": "NOME_MUNICIPIO",
+          "rename": "nome_municipio"
+        },
+        {
+          "name": "NUMERO_PROCESSO_PAGAMENTO",
+          "rename": "num_processo_pagamento",
+          "breaked": true
+        },
+        {
+          "name": "NUMERO_CONTRATO",
+          "rename": "num_contrato",
+          "breaked": true
+        },
+        {
+          "name": "CODIGO_UNIDADE_ORCAMENTARIA",
+          "rename": "cod_und_orcamentaria"
+        },
+        {
+          "name": "CODIGO_FUNCAO",
+          "rename": "cod_funcao"
+        },
+        {
+          "name": "CODIGO_SUBFUNCAO",
+          "rename": "cod_subfuncao"
+        },
+        {
+          "name": "CODIGO_PROGRAMA",
+          "rename": "cod_programa"
+        },
+        {
+          "name": "CODIGO_ACAO",
+          "rename": "cod_acao"
+        },
+        {
+          "name": "CODIGO_FONTE_RECURSO",
+          "rename": "cod_fonte_recurso"
+        },
+        {
+          "name": "CODIGO_NATUREZA_DESPESA",
+          "rename": "cod_natureza_despesa"
+        },
+        {
+          "name": "CODIGO_CATEGORIA_ECONOMICA_DESPESA",
+          "rename": "cod_categoria_economica_despesa"
+        },
+        {
+          "name": "CODIGO_GRUPO_NATUREZA_DESPESA",
+          "rename": "cod_gp_natureza_despesa"
+        },
+        {
+          "name": "CODIGO_MODALIDADE_APLICACAO_DESPESA",
+          "rename": "cod_modalidade_aplicacao_despesa"
+        },
+        {
+          "name": "CODIGO_ELEMENTO_DESPESA",
+          "rename": "cod_elemento_despesa"
+        },
+        {
+          "name": "CODIGO_ITEM_DESPESA",
+          "rename": "cod_item_despesa"
+        }
+      ]
+    },
+    {
+      "title": "Despesa Orçamentária: Notas de Empenho - Diárias",
+      "tag": "notas_empenho_diarias",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=Diarias&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "Auxílio pecuniário concedido a título de indenização pelas despesas com alimentação, hospedagem e deslocamento urbano. O seu valor é pago integralmente, por dia de afastamento da sede de serviço ou pela metade, 50% (cinqüenta por cento), quando não houver necessidade de pernoite.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_UNIDADE_GESTORA",
+          "rename": "cod_und_gestora"
+        },
+        {
+          "name": "NUMERO_EMPENHO",
+          "rename": "num_empenho"
+        },
+        {
+          "name": "NUMERO_EMPENHO_ORIGEM",
+          "rename": "num_empenho_origem"
+        },
+        {
+          "name": "DATA_EMPENHO",
+          "rename": "dt_empenho"
+        },
+        {
+          "name": "HISTORICO_EMPENHO",
+          "rename": "historico_empenho"
+        },
+        {
+          "name": "CODIGO_SITUACAO_EMPENHO",
+          "rename": "cod_situacao_empenho"
+        },
+        {
+          "name": "NOME_SITUACAO_EMPENHO",
+          "rename": "nome_situacao_empenho"
+        },
+        {
+          "name": "CODIGO_TIPO_EMPENHO",
+          "rename": "cod_tp_empenho"
+        },
+        {
+          "name": "DESCRICAO_TIPO_EMPENHO",
+          "rename": "desc_tp_empenho"
+        },
+        {
+          "name": "VALOR_EMPENHO",
+          "rename": "valor_empenho"
+        },
+        {
+          "name": "CODIGO_MODALIDADE_LICITACAO",
+          "rename": "cod_modalidade_licitacao"
+        },
+        {
+          "name": "CODIGO_MOTIVO_DISPENSA_LICITACAO",
+          "rename": "cod_motivo_dispensa_licitacao"
+        },
+        {
+          "name": "CODIGO_TIPO_CREDITO",
+          "rename": "cod_tp_credito"
+        },
+        {
+          "name": "NOME_TIPO_CREDITO",
+          "rename": "nome_tp_credito"
+        },
+        {
+          "name": "DESTINO_DIARIAS",
+          "rename": "destino_diarias",
+          "breaked": true
+        },
+        {
+          "name": "DATA_SAIDA_DIARIAS",
+          "rename": "dt_saida_diarias"
+        },
+        {
+          "name": "DATA_CHEGADA_DIARIAS",
+          "rename": "dt_chegada_diarias"
+        },
+        {
+          "name": "NOME_CREDOR",
+          "rename": "nome_credor",
+          "breaked": true
+        },
+        {
+          "name": "CPFCNPJ_CREDOR",
+          "rename": "cpf_cnpj_credor"
+        },
+        {
+          "name": "TIPO_CREDOR",
+          "rename": "tipo_credor"
+        },
+        {
+          "name": "CODIGO_MUNICIPIO",
+          "rename": "cod_municipio"
+        },
+        {
+          "name": "NOME_MUNICIPIO",
+          "rename": "nome_municipio"
+        },
+        {
+          "name": "NUMERO_PROCESSO_PAGAMENTO",
+          "rename": "num_processo_pagamento",
+          "breaked": true
+        },
+        {
+          "name": "NUMERO_CONTRATO",
+          "rename": "num_contrato",
+          "breaked": true
+        },
+        {
+          "name": "CODIGO_UNIDADE_ORCAMENTARIA",
+          "rename": "cod_und_orcamentaria"
+        },
+        {
+          "name": "CODIGO_FUNCAO",
+          "rename": "cod_funcao"
+        },
+        {
+          "name": "CODIGO_SUBFUNCAO",
+          "rename": "cod_subfuncao"
+        },
+        {
+          "name": "CODIGO_PROGRAMA",
+          "rename": "cod_programa"
+        },
+        {
+          "name": "CODIGO_ACAO",
+          "rename": "cod_acao"
+        },
+        {
+          "name": "CODIGO_FONTE_RECURSO",
+          "rename": "cod_fonte_recurso"
+        },
+        {
+          "name": "CODIGO_NATUREZA_DESPESA",
+          "rename": "cod_natureza_despesa"
+        },
+        {
+          "name": "CODIGO_CATEGORIA_ECONOMICA_DESPESA",
+          "rename": "cod_categoria_economica_despesa"
+        },
+        {
+          "name": "CODIGO_GRUPO_NATUREZA_DESPESA",
+          "rename": "cod_gp_natureza_despesa"
+        },
+        {
+          "name": "CODIGO_MODALIDADE_APLICACAO_DESPESA",
+          "rename": "cod_modalidade_aplicacao_despesa"
+        },
+        {
+          "name": "CODIGO_ELEMENTO_DESPESA",
+          "rename": "cod_elemento_despesa"
+        },
+        {
+          "name": "CODIGO_ITEM_DESPESA",
+          "rename": "cod_item_despesa"
+        }
+      ]
+    },
+    {
+      "title": "Despesas: Anulações de Autorização de Pagamento",
+      "tag": "anulacoes_pagamento",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=pagamento_anulacao&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "Registros de anulação de pagamentos, bem como transferências de recursos entre UGs, liberação de recursos para fins de adiantamento, suprimento de fundos, cota, repasse, sub-repasse e afins.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_UNIDADE_GESTORA",
+          "rename": "cod_und_gestora"
+        },
+        {
+          "name": "NUMERO_EMPENHO",
+          "rename": "num_empenho"
+        },
+        {
+          "name": "NUMERO_GUIA_DEVOLUCAO",
+          "rename": "num_guia_devolucao"
+        },
+        {
+          "name": "NUMERO_AUTORIZACAO_PAGAMENTO",
+          "rename": "num_autorizacao_pagamento"
+        },
+        {
+          "name": "TIPO_DESPESA",
+          "rename": "tp_despesa"
+        },
+        {
+          "name": "DATA_DOCUMENTO",
+          "rename": "dt_doc"
+        },
+        {
+          "name": "VALOR_DOCUMENTO",
+          "rename": "valor_doc"
+        },
+        {
+          "name": "CODIGO_TIPO_DOCUMENTO",
+          "rename": "cod_tp_doc"
+        },
+        {
+          "name": "DESCRICAO_TIPO_DOCUMENTO",
+          "rename": "desc_tp_doc"
+        },
+        {
+          "name": "NOME_CREDOR",
+          "rename": "nome_credor"
+        },
+        {
+          "name": "CPFCNPJ_CREDOR",
+          "rename": "cpf_cnpj_credor"
+        },
+        {
+          "name": "TIPO_CREDOR",
+          "rename": "tp_credor"
+        }
+      ]
+    },
+    {
+      "title": "Despesas: Autorizações de Pagamento",
+      "tag": "autorizacoes_pagamento",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=pagamento&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "Registros dos pagamentos de compromissos, bem como transferências de recursos entre UGs, liberação de recursos para fins de adiantamento, suprimento de fundos, cota, repasse, sub-repasse e afins.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_UNIDADE_GESTORA",
+          "rename": "cod_und_gestora"
+        },
+        {
+          "name": "NUMERO_EMPENHO",
+          "rename": "num_empenho"
+        },
+        {
+          "name": "NUMERO_AUTORIZACAO_PAGAMENTO",
+          "rename": "num_autorizacao_pagamento"
+        },
+        {
+          "name": "TIPO_DESPESA",
+          "rename": "tp_despesa"
+        },
+        {
+          "name": "DATA_PAGAMENTO",
+          "rename": "dt_pagamento"
+        },
+        {
+          "name": "VALOR_PAGAMENTO",
+          "rename": "valor_pagamento"
+        },
+        {
+          "name": "CODIGO_TIPO_DOCUMENTO",
+          "rename": "cod_tp_doc"
+        },
+        {
+          "name": "DESCRICAO_TIPO_DOCUMENTO",
+          "rename": "desc_tp_doc"
+        },
+        {
+          "name": "NOME_CREDOR",
+          "rename": "nome_credor"
+        },
+        {
+          "name": "CPFCNPJ_CREDOR",
+          "rename": "cpf_cnpj_credor"
+        },
+        {
+          "name": "TIPO_CREDOR",
+          "rename": "tp_credor"
+        }
+      ]
+    },
+    {
+      "title": "Grupo Financeiro",
+      "tag": "gp_financeiro",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=grupo_financeiro&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_GRUPO_FINANCEIRO",
+          "rename": "cod_gp_financeiro"
+        },
+        {
+          "name": "DESCRICAO_GRUPO_FINANCEIRO",
+          "rename": "desc_gp_financeiro",
+          "breaked": true
+        }
+      ]
+    },
+    {
+      "title": "Receitas: Execução",
+      "tag": "receitas_execucao",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=receitas_execucao&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "Recursos efetivamente arrecadados na gestão e computados na apuração do resultado do exercício, desdobrados nas categorias econômicas de correntes e de capital.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "MES",
+          "rename": "mes"
+        },
+        {
+          "name": "CODIGO_UNIDADE_GESTORA",
+          "rename": "cod_und_gestora"
+        },
+        {
+          "name": "CODIGO_ITEM_RECEITA",
+          "rename": "cod_item_receita"
+        },
+        {
+          "name": "NOME_ITEM_RECEITA",
+          "rename": "nome_item_receita"
+        },
+        {
+          "name": "CODIGO_FONTE_RECURSO",
+          "rename": "code_fonte_recurso"
+        },
+        {
+          "name": "VALOR_MES",
+          "rename": "valor_mes"
+        },
+        {
+          "name": "CODIGO_CATEGORIA_RECEITA",
+          "rename": "cod_categoria_receita"
+        },
+        {
+          "name": "CODIGO_ORIGEM_RECEITA",
+          "rename": "cod_origem_receita"
+        },
+        {
+          "name": "CODIGO_ESPECIE_RECEITA",
+          "rename": "cod_especie_receita"
+        },
+        {
+          "name": "CODIGO_RUBRICA_RECEITA",
+          "rename": "cod_rubrica_receita"
+        },
+        {
+          "name": "CODIGO_ALINEA_RECEITA",
+          "rename": "cod_alinea_receita"
+        },
+        {
+          "name": "CODIGO_SUBALINEA_RECEITA",
+          "rename": "cod_subalinea_receita"
+        }
+      ]
+    },
+    {
+      "title": "Receitas: Previsão",
+      "tag": "receitas_previsao",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=receitas_previsao&exercicio={}&mes={}",
+      "onlyYear": false,
+      "periodicData": true,
+      "description": "Previsão dos recursos a serem arrecadados na gestão e computados na apuração do resultado do exercício, desdobrados nas categorias econômicas de correntes e de capital.",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "MES",
+          "rename": "mes"
+        },
+        {
+          "name": "CODIGO_UNIDADE_GESTORA",
+          "rename": "cod_und_gestora"
+        },
+        {
+          "name": "CODIGO_ITEM_RECEITA",
+          "rename": "cod_item_receita"
+        },
+        {
+          "name": "NOME_ITEM_RECEITA",
+          "rename": "nome_item_receita"
+        },
+        {
+          "name": "CODIGO_FONTE_RECURSO",
+          "rename": "code_fonte_recurso"
+        },
+        {
+          "name": "VALOR_PREVISAO_EXERCICIO",
+          "rename": "valor_previsao_exercicio"
+        },
+        {
+          "name": "CODIGO_CATEGORIA_RECEITA",
+          "rename": "cod_categoria_receita"
+        },
+        {
+          "name": "CODIGO_ORIGEM_RECEITA",
+          "rename": "cod_origem_receita"
+        },
+        {
+          "name": "CODIGO_ESPECIE_RECEITA",
+          "rename": "cod_especie_receita"
+        },
+        {
+          "name": "CODIGO_RUBRICA_RECEITA",
+          "rename": "cod_rubrica_receita"
+        },
+        {
+          "name": "CODIGO_ALINEA_RECEITA",
+          "rename": "cod_alinea_receita"
+        },
+        {
+          "name": "CODIGO_SUBALINEA_RECEITA",
+          "rename": "cod_subalinea_receita"
+        }
+      ]
+    },
+    {
+      "title": "Situação Empenho",
+      "tag": "situacao_empenho",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=situacao_empenho",
+      "onlyYear": false,
+      "periodicData": false,
+      "description": "",
+      "columns": [
+        {
+          "name": "CODIGO",
+          "rename": "cod"
+        },
+        {
+          "name": "DESCRICAO",
+          "rename": "desc"
+        }
+      ]
+    },
+    {
+      "title": "Tipo de Crédito",
+      "tag": "tp_credito",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=tipo_credito",
+      "onlyYear": false,
+      "periodicData": false,
+      "description": "",
+      "columns": [
+        {
+          "name": "CODIGO",
+          "rename": "cod"
+        },
+        {
+          "name": "DESCRICAO",
+          "rename": "desc"
+        }
+      ]
+    },
+    {
+      "title": "Tipo de Movimentação Orçamentária",
+      "tag": "tp_movimentacao_orcamentaria",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=tipo_movimentacao_orcamentaria",
+      "onlyYear": false,
+      "periodicData": false,
+      "description": "",
+      "columns": [
+        {
+          "name": "CODIGO",
+          "rename": "cod"
+        },
+        {
+          "name": "DESCRICAO",
+          "rename": "desc"
+        }
+      ]
+    },
+    {
+      "title": "Tipos de Documentos",
+      "tag": "tp_documentos",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=tipos_documento",
+      "onlyYear": false,
+      "periodicData": false,
+      "description": "",
+      "columns": [
+        {
+          "name": "CODIGO",
+          "rename": "cod"
+        },
+        {
+          "name": "DESCRICAO",
+          "rename": "desc"
+        }
+      ]
+    }
   ]
 }
