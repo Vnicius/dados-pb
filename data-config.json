@@ -1713,6 +1713,24 @@
           "rename": "desc"
         }
       ]
+    },
+    {
+      "title": "Tipos de Documentos",
+      "tag": "tp_documentos",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=tipos_documento",
+      "onlyYear": false,
+      "periodicData": false,
+      "description": "",
+      "columns": [
+        {
+          "name": "CODIGO",
+          "rename": "cod"
+        },
+        {
+          "name": "DESCRICAO",
+          "rename": "desc"
+        }
+      ]
     }
   ]
 }
