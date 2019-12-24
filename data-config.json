@@ -1512,6 +1512,29 @@
           "rename": "tp_credor"
         }
       ]
+    },
+    {
+      "title": "Grupo Financeiro",
+      "tag": "gp_financeiro",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=grupo_financeiro&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "",
+      "columns": [
+        {
+          "name": "EXERCICIO",
+          "rename": "exercicio"
+        },
+        {
+          "name": "CODIGO_GRUPO_FINANCEIRO",
+          "rename": "cod_gp_financeiro"
+        },
+        {
+          "name": "DESCRICAO_GRUPO_FINANCEIRO",
+          "rename": "desc_gp_financeiro",
+          "breaked": true
+        }
+      ]
     }
   ]
 }
