@@ -1944,6 +1944,80 @@
           "rename": "url_aditivo_convenio"
         }
       ]
+    },
+    {
+      "title": "Convênios: Entre o Estado e os municípios",
+      "tag": "convenios_estados_municipios",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=convenios&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "Instrumento que discipline a transferência de recursos públicos e tenha como partícipe órgão da Administração Pública federal ou estadual, direta, autárquica ou fundacional, empresa pública ou sociedade de economia mista que estejam gerindo recursos dos orçamentos da União ou do Estado, visando à execução de programas de trabalho, projeto/atividade ou evento de interesse recíproco, em regime de mútua cooperação ou para o atingimento de objetivos comuns.",
+      "columns": [
+        {
+          "name": "CODIGO_CONVENIO",
+          "rename": "cond_convenio"
+        },
+        {
+          "name": "NUMERO_REGISTRO_CGE",
+          "rename": "num_registro_cge"
+        },
+        {
+          "name": "NUMERO_CONVENIO",
+          "rename": "num_convenio"
+        },
+        {
+          "name": "NOME_CONCEDENTE",
+          "rename": "nome_concedente"
+        },
+        {
+          "name": "NOME_CONVENENTE",
+          "rename": "nomve_convenente"
+        },
+        {
+          "name": "CNPJ_CONVENENTE",
+          "rename": "cnpj_convenente"
+        },
+        {
+          "name": "NOME_MUNICIPIO",
+          "rename": "nome_municipio"
+        },
+        {
+          "name": "OBJETIVO_CONVENIO",
+          "rename": "objetivo_convenio"
+        },
+        {
+          "name": "COMPLEMENTO_OBJETO_CONVENIO",
+          "rename": "complemento_objeto_convenio"
+        },
+        {
+          "name": "DATA_CELEBRACAO_CONVENIO",
+          "rename": "dt_celebracao_convenio"
+        },
+        {
+          "name": "DATA_PUBLICACAO",
+          "rename": "dt_publicaco"
+        },
+        {
+          "name": "VALOR_CONCEDENTE",
+          "rename": "valor_concedente"
+        },
+        {
+          "name": "VALOR_CONTRAPARTIDA",
+          "rename": "valor_contrapartida"
+        },
+        {
+          "name": "DATA_INICIO_VIGENCIA",
+          "rename": "dt_inicio_vigencia"
+        },
+        {
+          "name": "DATA_TERMINO_VIGENCIA",
+          "rename": "dt_termino_vigencia"
+        },
+        {
+          "name": "URL_CONVENIO",
+          "rename": "url_convenio"
+        }
+      ]
     }
   ]
 }
