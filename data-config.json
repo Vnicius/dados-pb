@@ -1823,6 +1823,64 @@
           "rename": "url_contrato"
         }
       ]
+    },
+    {
+      "title": "Contratos: Aditivos",
+      "tag": "contratos_aditivos",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=aditivos_contrato&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "Instrumento legal utilizado para proceder a alteração de dados em contratos.",
+      "columns": [
+        {
+          "name": "CODIGO_ADITIVO_CONTRATO",
+          "rename": "cod_aditivo_contrato"
+        },
+        {
+          "name": "CODIGO_CONTRATO",
+          "rename": "cond_contrato"
+        },
+        {
+          "name": "MOTIVO_ADITIVACAO",
+          "rename": "motivo_aditivacao"
+        },
+        {
+          "name": "NUMERO_ADITIVO_CONTRATO",
+          "rename": "num_aditivo_contrato"
+        },
+        {
+          "name": "DATA_INICIO_VIGENCIA",
+          "rename": "dt_inicio_vigencia"
+        },
+        {
+          "name": "DATA_TERMINO_VIGENCIA",
+          "rename": "dt_termino_vigencia"
+        },
+        {
+          "name": "VALOR_ADITIVO",
+          "rename": "valor_aditivo"
+        },
+        {
+          "name": "OBJETO_ADITIVO",
+          "rename": "objeto_aditivo"
+        },
+        {
+          "name": "DATA_CELEBRACAO_ADITIVO",
+          "rename": "dt_celebracao_aditivo"
+        },
+        {
+          "name": "DATA_PUBLICACAO",
+          "rename": "dt_publicacao"
+        },
+        {
+          "name": "DATA_REPUBLICACAO",
+          "rename": "dt_republicaco"
+        },
+        {
+          "name": "URL_ADITIVO_CONTRATO",
+          "rename": "url_aditivo_contrato"
+        }
+      ]
     }
   ]
 }
