@@ -1732,5 +1732,97 @@
         }
       ]
     }
+  ],
+  "siga": [
+    {
+      "title": "Contratos",
+      "tag": "contratos",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=contratos&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "Todo e qualquer ajuste entre órgão ou entidade da Administração Pública e particulares, em que haja acordo de vontades para a formação de um vínculo e a estipulação de obrigações recíprocas, seja qual for a denominação utilizada.",
+      "columns": [
+        {
+          "name": "CODIGO_CONTRATO",
+          "rename": "cod_contrato"
+        },
+        {
+          "name": "NUMERO_REGISTRO_CGE",
+          "rename": "num_registro_cge"
+        },
+        {
+          "name": "NUMERO_CONTRATO",
+          "rename": "num_contrato"
+        },
+        {
+          "name": "NOME_CONTRATANTE",
+          "rename": "nome_contratante"
+        },
+        {
+          "name": "NUMERO_PROCESSO_LICITATORIO",
+          "rename": "num_processo_licitatorio"
+        },
+        {
+          "name": "OBJETO_CONTRATO",
+          "rename": "objeto_contrato"
+        },
+        {
+          "name": "COMPLEMENTO_OBJETO_CONTRATO",
+          "rename": "complemento_objeto_contrato"
+        },
+        {
+          "name": "NOME_CONTRATADO",
+          "rename": "nome_contratado"
+        },
+        {
+          "name": "CPFCNPJ_CONTRATADO",
+          "rename": "cpf_cnpj_contratado"
+        },
+        {
+          "name": "DATA_CELEBRACAO_CONTRATO",
+          "rename": "dt_celebracao_contrato"
+        },
+        {
+          "name": "DATA_PUBLICACAO",
+          "rename": "dt_publicaco"
+        },
+        {
+          "name": "DATA_INICIO_VIGENCIA",
+          "rename": "dt_inicio_vigencia"
+        },
+        {
+          "name": "DATA_TERMINO_VIGENCIA",
+          "rename": "dt_termino_vigencia"
+        },
+        {
+          "name": "VALOR_ORIGINAL",
+          "rename": "valor_original"
+        },
+        {
+          "name": "NOME_MUNICIPIO",
+          "rename": "nome_municipio"
+        },
+        {
+          "name": "OUTROS_MUNICIPIOS",
+          "rename": "outros_municipio"
+        },
+        {
+          "name": "NOME_GESTOR_CONTRATO",
+          "rename": "nome_gestor_contrato"
+        },
+        {
+          "name": "NUMERO_PORTARIA",
+          "rename": "num_portaria"
+        },
+        {
+          "name": "DATA_PUBLICACAO_PORTARIA",
+          "rename": "dt_publicacao_portaria"
+        },
+        {
+          "name": "URL_CONTRATO",
+          "rename": "url_contrato"
+        }
+      ]
+    }
   ]
 }
