@@ -69,26 +69,58 @@ optional arguments:
 
 ## Documentos
 
+**CGE**
+
+- Dotação Orçamentária - dotacao_orcamentaria
+- Liquidação - liquidacao
+- Tipo Modalidade de Pagamento - tp_modalidade_pagamento
+
+**DADOS-PB**
+
 - Ação Governamental - acao_governamental
 - Administração Escolar Indireta - adm_escolar_indireta
 - Administração Hospitalar Indireta - adm_hospitalar_indireta
 - Categoria Econômica Despesa - categoria_economica_despesa
-- Dotação Orçamentária - dotacao_orcamentaria
-- Elemento da Despesa - elemento_depesa
+- Elemento da Despesa - elemento_despesa
 - Fonte de Recurso - fonte_recurso
 - Função - funcao
 - Grupo Natureza de Despesa - gp_natureza_despesa
 - Item da Despesa - item_despesa
-- Liquidação - liquidacao
 - Modalidade Aplicação Despesa - modalidade_aplicacao_despesa
 - Modalidade de Licitação - modalidade_licitacao
 - Motivo da Dispensa de Licitação - motivo_dispensa_licitacao
 - Programas - programas
 - Subfunção - subfuncao
 - Tipos de Orçamentos - tipos_orcamento
-- Tipo Modalidade de Pagamento - tp_modalidade_pagamento
 - Unidade Gestora - und_gestora
 - Unidade Orçamentária - und_orcamentaria
+
+**FOPAG**
+
+- Resumo da Folha de Pagamento - resumo_folha_pagamento
+
+**SIAF**
+
+- Despesa Orçamentária: Notas de Empenho - notas_empenho
+- Despesa Orçamentária: Notas de Empenho de Anulação - notas_empenho_anulacao
+- Despesa Orçamentária: Notas de Empenho de Suplementação - notas_empenho_suplementacao
+- Despesa Orçamentária: Notas de Empenho - Diárias - notas_empenho_diarias
+- Despesas: Anulações de Autorização de Pagamento - anulacoes_pagamento
+- Despesas: Autorizações de Pagamento - autorizacoes_pagamento
+- Grupo Financeiro - gp_financeiro
+- Receitas: Execução - receitas_execucao
+- Receitas: Previsão - receitas_previsao
+- Situação Empenho - situacao_empenho
+- Tipo de Crédito - tp_credito
+- Tipo de Movimentação Orçamentária - tp_movimentacao_orcamentaria
+- Tipos de Documentos - tp_documentos
+
+**SIGA**
+
+- Contratos - contratos
+- Contratos: Aditivos - contratos_aditivos
+- Convênios: Aditivos - convenios_aditivos
+- Convênios: Entre o Estado e os municípios - convenios_estados_municipios
 
 ## Notações
 
