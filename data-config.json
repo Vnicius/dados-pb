@@ -1881,6 +1881,69 @@
           "rename": "url_aditivo_contrato"
         }
       ]
+    },
+    {
+      "title": "Convênios: Aditivos",
+      "tag": "convenios_aditivos",
+      "baseURL": "http://dados.pb.gov.br:80/get{}?nome=aditivos_convenio&exercicio={}",
+      "onlyYear": true,
+      "periodicData": true,
+      "description": "Instrumento legal utilizado para proceder a alteração de dados em convênios.",
+      "columns": [
+        {
+          "name": "CODIGO_ADITIVO_CONVENIO",
+          "rename": "cod_aditivo_convenio"
+        },
+        {
+          "name": "CODIGO_CONVENIO",
+          "rename": "cond_convenio"
+        },
+        {
+          "name": "MOTIVO_ADITIVACAO",
+          "rename": "motivo_aditivacao"
+        },
+        {
+          "name": "NUMERO_ADITIVO_CONVENIO",
+          "rename": "num_aditivo_convenio"
+        },
+        {
+          "name": "DATA_INICIO_VIGENCIA",
+          "rename": "dt_inicio_vigencia"
+        },
+        {
+          "name": "DATA_TERMINO_VIGENCIA",
+          "rename": "dt_termino_vigencia"
+        },
+        {
+          "name": "VALOR_CONCEDENTE",
+          "rename": "valor_concedente"
+        },
+        {
+          "name": "VALOR_CONVENENTE",
+          "rename": "valor_convenente"
+        },
+        {
+          "name": "OBJETO_ADITIVO",
+          "rename": "objeto_aditivo",
+          "breaked": true
+        },
+        {
+          "name": "DATA_CELEBRACAO_ADITIVO",
+          "rename": "dt_celebracao_aditivo"
+        },
+        {
+          "name": "DATA_PUBLICACAO",
+          "rename": "dt_publicaco"
+        },
+        {
+          "name": "DATA_REPUBLICACAO",
+          "rename": "dt_republicaco"
+        },
+        {
+          "name": "URL_ADITIVO_CONVENIO",
+          "rename": "url_aditivo_convenio"
+        }
+      ]
     }
   ]
 }

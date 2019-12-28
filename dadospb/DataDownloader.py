@@ -40,7 +40,7 @@ class DataDownloader(TemplateDownload):
     def __fix_breaked_data(self, item):
         
         if item == item:
-            return re.sub(r'\s+$', '', item)
+            return re.sub(r'\s+$', '', item).replace('\n', '')
         
         return item
 
