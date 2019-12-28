@@ -74,12 +74,25 @@ optional arguments:
 - Administração Hospitalar Indireta - adm_hospitalar_indireta
 - Categoria Econômica Despesa - categoria_economica_despesa
 - Dotação Orçamentária - dotacao_orcamentaria
+- Elemento da Despesa - elemento_depesa
+- Fonte de Recurso - fonte_recurso
+- Função - funcao
+- Grupo Natureza de Despesa - gp_natureza_despesa
+- Item da Despesa - item_despesa
 - Liquidação - liquidacao
+- Modalidade Aplicação Despesa - modalidade_aplicacao_despesa
+- Modalidade de Licitação - modalidade_licitacao
+- Motivo da Dispensa de Licitação - motivo_dispensa_licitacao
+- Programas - programas
+- Subfunção - subfuncao
+- Tipos de Orçamentos - tipos_orcamento
 - Tipo Modalidade de Pagamento - tp_modalidade_pagamento
+- Unidade Gestora - und_gestora
+- Unidade Orçamentária - und_orcamentaria
 
 ## Notações
 
-- un - Unidade
+- und - Unidade
 - cod - Código
 - num - Número
 - tp - tipo
