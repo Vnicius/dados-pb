@@ -214,7 +214,7 @@ class TemplateDownload():
             # realizar dowload dos dados
             logging.info(f'Baixando {self.get_url(0, 0)}')
             
-            data = req.get(self.get_url(0, 0)).text
+            data = req.get(self.get_url(0, 0), verify=self.verify_ssl).text
 
             logging.info(f'Baixado')
         except ConnectionError :
@@ -272,7 +272,7 @@ class TemplateDownload():
                         # realizar dowload dos dados
                         logging.info(f'Baixando {self.get_url(y, m)}')
                         
-                        data = req.get(self.get_url(y, m)).text
+                        data = req.get(self.get_url(y, m), verify=self.verify_ssl).text
 
                         logging.info(f'Baixado')
                     except ConnectionError :
@@ -298,7 +298,7 @@ class TemplateDownload():
                 try:
                     # realizar dowload dos dados
                     logging.info(f'Baixando {self.get_url(y, 0)}')
-                    data = req.get(self.get_url(y, 0)).text
+                    data = req.get(self.get_url(y, 0), verify=self.verify_ssl).text
                 except ConnectionError:
                     logging.error(f'Erro ao baixar {self.get_url(y, 0)}',
                                   exc_info=True)
