@@ -1,17 +1,21 @@
-import os
-import requests as req
-from requests.exceptions import ConnectionError
-from datetime import datetime as dt
-import pandas as pd
-import shutil
-from dadospb.utils.createdir import createdir
-from dadospb.utils.csvtodf import csv_to_df
-from dadospb.utils.jsontodf import json_to_df
-from dadospb.utils.format import format_month
-from halo import Halo
 import logging
+import os
+import shutil
+from datetime import datetime as dt
+from functools import partial
+from io import StringIO
+
+import pandas as pd
+import requests as req
+from halo import Halo
+from requests.exceptions import ConnectionError
+
+from dadospb.utils.createdir import createdir
+from dadospb.utils.format import format_month
+
 
 TIME_NOW = dt.now()
+
 
 class TemplateDownload():
     '''
@@ -31,6 +35,10 @@ class TemplateDownload():
             output_dir (str): diretôrio de saída
             periodic_data (bool): se os dados são atualizados periodicamente
     '''
+    PANDAS_READ_METHODS = {
+        "csv": partial(pd.read_csv, sep=";"),
+        "json": pd.read_json
+    }
 
     def __init__(self,
                  base_url,
@@ -74,6 +82,7 @@ class TemplateDownload():
         self.output_dir = output_dir
         self.periodic_data = periodic_data
 
+        self.pandas_read_method = self.PANDAS_READ_METHODS[self.file_type]
         self.__spinner = Halo(text=f'Baixando {self.get_title()}', spinner='dots')
 
     def get_title(self):
@@ -201,7 +210,7 @@ class TemplateDownload():
             # realizar dowload dos dados
             logging.info(f'Baixando {self.get_url(0, 0)}')
             
-            data = req.get(self.get_url(0, 0)).content
+            data = req.get(self.get_url(0, 0)).text
 
             logging.info(f'Baixado')
         except ConnectionError :
@@ -227,9 +236,7 @@ class TemplateDownload():
         self.__fix_period()
         
         data_dir = self.output_dir # diretorio dos dados
-        tmp_dir = 'tmp' # diretório temporário
         data_path = data_dir if self.__is_single_date() else os.path.join(data_dir, self.file_name) # caminho do arquivo
-        data_tmp_path = os.path.join(data_dir, tmp_dir) # caminho do arquivo temporário
         datas = []  # lista de dados
         
         # criar o diretório dos dados
@@ -238,10 +245,6 @@ class TemplateDownload():
         logging.basicConfig(filename=os.path.join(data_dir, f'log.log'),
                             level=logging.INFO, 
                             format='%(asctime)s: %(module)s: %(levelname)s: %(message)s')
-
-        # criar o diretório temporário
-        logging.info(f'Criando diretório "{os.path.join(data_dir, tmp_dir)}"')
-        createdir(os.path.join(data_dir, tmp_dir)) 
 
         # cirar diretório para os arqivos baixados
         logging.info(f'Criando diretório "{data_path}"')
@@ -265,7 +268,7 @@ class TemplateDownload():
                         # realizar dowload dos dados
                         logging.info(f'Baixando {self.get_url(y, m)}')
                         
-                        data = req.get(self.get_url(y, m)).content
+                        data = req.get(self.get_url(y, m)).text
 
                         logging.info(f'Baixado')
                     except ConnectionError :
@@ -275,8 +278,7 @@ class TemplateDownload():
 
                     if self.merge_data:
                         logging.info(f'Guardando os dados de "{self.file_name}_{y}{format_month(m)}"')
-                        data_df = self.__get_df(
-                            data_tmp_path, data, f'{self.file_name}_{y}{format_month(m)}')
+                        data_df = self.__get_df(data)
                         
                         if data_df.empty:
                             logging.info(f'VAZIO: "{self.file_name}_{y}{format_month(m)}"')
@@ -291,7 +293,7 @@ class TemplateDownload():
                 try:
                     # realizar dowload dos dados
                     logging.info(f'Baixando {self.get_url(y, 0)}')
-                    data = req.get(self.get_url(y, 0)).content
+                    data = req.get(self.get_url(y, 0)).text
                 except ConnectionError:
                     logging.error(f'Erro ao baixar {self.get_url(y, 0)}')
                     self.__spinner_fail()
@@ -299,8 +301,7 @@ class TemplateDownload():
 
                 if self.merge_data:
                     logging.info(f'Guardando os dados de "{self.file_name}_{y}"')
-                    data_df = self.__get_df(
-                        data_tmp_path, data, f'{self.file_name}_{y}')
+                    data_df = self.__get_df(data)
 
                     if data_df.empty:
                         logging.info(f'VAZIO: "{self.file_name}_{y}"')
@@ -315,10 +316,6 @@ class TemplateDownload():
             df = pd.concat(datas)
             self.__save_df(data_dir, df, self.file_name)
 
-        # remover a o diretório temporário
-        logging.info(f'Removendo diretório temporário "{data_tmp_path}"')
-        shutil.rmtree(data_tmp_path)
-        
         # remover os diretório com os arquvios separados
         if self.merge_data:
             logging.info(f'Removendo diretório "{data_path}"')
@@ -338,7 +335,7 @@ class TemplateDownload():
         '''
         
         # pegar o dataframe
-        df = self.__get_df(path, data, file_name)
+        df = self.__get_df(data)
 
         if df.empty:
             logging.info(f'VAZIO: "{file_name}"')
@@ -374,33 +371,15 @@ class TemplateDownload():
         
         logging.info(f'Arquivo "{file_name}" salvo em "{path}"')
 
-    def __get_df(self, path, data, file_name):
+    def __get_df(self, data):
         '''
             Adiquirir o objeto DataFrame a partir de um conjunto de dados
 
             Params:
-                path (str): caminho onde o arquivo deve ser salvo
                 data (str): conteúdo do arquivo
-                file_name (str): nome do arquivo
         '''
-        
-        logging.info(f'Lendo {file_name}.{self.file_type}')
-
-        df = pd.DataFrame()
-
-        try:
-            if self.file_type == 'csv':
-                # ler csv
-                df = csv_to_df(
-                    os.path.join(path, f'{file_name}.{self.file_type}'), data)
-
-            elif self.file_type == 'json':
-                # ler json
-                df = json_to_df(os.path.join(
-                    path, f'{file_name}.{self.file_type}'), data)
-
-            df = self.preprocess(df)
-        except pd.errors.EmptyDataError:
-            df = pd.DataFrame()
-
-        return df
+        with StringIO(data) as buffer:
+            try:
+                return self.preprocess(self.pandas_read_method(buffer))
+            except pd.errors.EmptyDataError:
+                return pd.DataFrame()
