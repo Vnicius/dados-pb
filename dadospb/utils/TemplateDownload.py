@@ -1,17 +1,16 @@
 import logging
 import os
-import shutil
+import warnings
 from datetime import datetime as dt
 from functools import partial
 from io import StringIO
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import pandas as pd
-import requests as req
+import requests
 from halo import Halo
 from requests.exceptions import ConnectionError
-
-from dadospb.utils.createdir import createdir
-from dadospb.utils.format import format_month
 
 
 TIME_NOW = dt.now()
@@ -82,12 +81,22 @@ class TemplateDownload():
         self.end_month = end_month
         self.only_year = only_year
         self.merge_data = merge_data
-        self.output_dir = output_dir
+        self.output_dir = Path(output_dir)
         self.periodic_data = periodic_data
         self.verify_ssl = not no_verify_ssl
 
+        self.output_dir.mkdir(exist_ok=True)
+        self.output_sub_dir = None
+        if not self.__is_single_date() and not self.merge_data:
+            self.output_sub_dir = self.output_dir / self.file_name
+            self.output_sub_dir.mkdir(exist_ok=True)
+
         self.pandas_read_method = self.PANDAS_READ_METHODS[self.file_type]
         self.__spinner = Halo(text=f'Baixando {self.get_title()}', spinner='dots')
+
+        logging.basicConfig(filename=self.output_dir / 'log.log',
+                            level=logging.INFO, 
+                            format='%(asctime)s: %(module)s: %(levelname)s: %(message)s')
 
     def get_title(self):
         ''' 
@@ -194,141 +203,89 @@ class TemplateDownload():
         else:
             self.__download_fixed_data()
 
+    def __load_data(self, year=0, month=0):
+        url = self.get_url(year, month)
+        logging.info(f'Baixando {url}')
+
+        try:
+            with warnings.catch_warnings():  # disable non-SSL warning if needed
+                warnings.simplefilter("ignore")
+                resp = requests.get(url, verify=self.verify_ssl)
+        except ConnectionError :
+            logging.error(f'Erro ao baixar {url}', exc_info=True)
+            self.__spinner_fail()
+            return False
+
+        logging.info('Baixado')
+        return resp.text
+
     def __download_fixed_data(self):
         '''
             Realizar o download do arquivo sem período de tempo
         '''
-        # iniciar o spinner
         self.__spinner_start()
-        
-        data_dir = self.output_dir # diretorio dos dados
-        data = ''
-
-        createdir(data_dir) # criar o diretório dos dados
-
-        logging.basicConfig(filename=os.path.join(data_dir, f'log.log'),
-                            level=logging.INFO, 
-                            format='%(asctime)s: %(module)s: %(levelname)s: %(message)s')
-
-        try:
-            # realizar dowload dos dados
-            logging.info(f'Baixando {self.get_url(0, 0)}')
-            
-            data = req.get(self.get_url(0, 0), verify=self.verify_ssl).text
-
-            logging.info(f'Baixado')
-        except ConnectionError :
-            logging.error(f'Erro ao baixar {self.get_url(0, 0)}', exc_info=True)
-            self.__spinner_fail()
+        data = self.__load_data()
+        if data is False:
             return
-        
-        # salvar o arquivo
-        self.__save(data_dir, data, self.file_name)
 
-        # finalizar o spinner
+        self.__save(self.output_dir, data, self.file_name)
         self.__spinner_succeed()
 
     def __download_in_period(self):
         '''
             Realiza o download dos arquivos num dado perído de tempo
         '''
-
-        # iniciar o spinner
         self.__spinner_start()
-
-        # ajeitar o ano e o mês
         self.__fix_period()
-        
-        data_dir = self.output_dir # diretorio dos dados
-        data_path = data_dir if self.__is_single_date() else os.path.join(data_dir, self.file_name) # caminho do arquivo
-        datas = []  # lista de dados
-        
-        # criar o diretório dos dados
-        createdir(data_dir)
+        dataframes = []  # lista de dataframes
 
-        logging.basicConfig(filename=os.path.join(data_dir, f'log.log'),
-                            level=logging.INFO, 
-                            format='%(asctime)s: %(module)s: %(levelname)s: %(message)s')
+        with TemporaryDirectory() as tmp:
+            for y in range(self.start_year, self.end_year + 1):
+                start = self.start_month if y == self.start_year else 1
+                end = self.end_month if y == self.end_year else 12
 
-        # cirar diretório para os arqivos baixados
-        logging.info(f'Criando diretório "{data_path}"')
-        createdir(data_path)
+                # se os dados são mensais
+                if not self.only_year:
+                    for m in range(start, end + 1):
+                        # realizar o dowload dos dados
+                        data = self.__load_data(y, m)
+                        if data is False:
+                            return
 
-        for y in range(self.start_year, self.end_year + 1):
-            start = 1
-            end = 12
+                        if self.merge_data:
+                            logging.info(f'Guardando os dados de "{self.file_name}_{y}{m:0>2d}"')
+                            df = self.__get_df(data)
+                            if df.empty:
+                                logging.info(f'VAZIO: "{self.file_name}_{y}{m:0>2d}"')
+                            else:
+                                dataframes.append(df)
 
-            if y == self.start_year:
-                start = self.start_month
+                        elif self.output_sub_dir:
+                            self.__save(self.output_sub_dir, data, f'{self.file_name}_{y}{m:0>2d}')
 
-            if y == self.end_year:
-                end = self.end_month
-
-            # se os dados são mensais
-            if not self.only_year:
-                for m in range(start, end + 1):
-                    # realizar o dowload dos dados
-                    try:
-                        # realizar dowload dos dados
-                        logging.info(f'Baixando {self.get_url(y, m)}')
-                        
-                        data = req.get(self.get_url(y, m), verify=self.verify_ssl).text
-
-                        logging.info(f'Baixado')
-                    except ConnectionError :
-                        logging.error(f'Erro ao baixar {self.get_url(y, m)}',
-                                      exc_info=True)
-                        self.__spinner_fail()
+                # se os dados são anuais
+                else:
+                    data = self.__load_data(y)
+                    if data is False:
                         return
 
                     if self.merge_data:
-                        logging.info(f'Guardando os dados de "{self.file_name}_{y}{format_month(m)}"')
-                        data_df = self.__get_df(data)
-                        
-                        if data_df.empty:
-                            logging.info(f'VAZIO: "{self.file_name}_{y}{format_month(m)}"')
+                        logging.info(f'Guardando os dados de "{self.file_name}_{y}"')
+                        df = self.__get_df(data)
+                        if df.empty:
+                            logging.info(f'VAZIO: "{self.file_name}_{y}"')
                         else:
-                            datas.append(data_df)
-                    else:
-                        self.__save(data_path, data,
-                                    f'{self.file_name}_{y}{format_month(m)}')
+                            dataframes.append(df)
+                    elif self.output_sub_dir:
+                        self.__save(self.output_sub_dir, data, f'{self.file_name}_{y}')
 
-            else:
-                # se os dados são anuais
-                try:
-                    # realizar dowload dos dados
-                    logging.info(f'Baixando {self.get_url(y, 0)}')
-                    data = req.get(self.get_url(y, 0), verify=self.verify_ssl).text
-                except ConnectionError:
-                    logging.error(f'Erro ao baixar {self.get_url(y, 0)}',
-                                  exc_info=True)
-                    self.__spinner_fail()
-                    return
+            # juntar os arquivos
+            if self.merge_data and dataframes:
+                logging.info(f'Juntando os arquivos')
+                self.__save_df(self.output_dir, pd.concat(dataframes), self.file_name)
 
-                if self.merge_data:
-                    logging.info(f'Guardando os dados de "{self.file_name}_{y}"')
-                    data_df = self.__get_df(data)
-
-                    if data_df.empty:
-                        logging.info(f'VAZIO: "{self.file_name}_{y}"')
-                    else:
-                        datas.append(data_df)
-                else:
-                    self.__save(data_path, data, f'{self.file_name}_{y}')
-
-        # juntar os arquivos
-        if self.merge_data:
-            logging.info(f'Juntando os arquivos')
-            df = pd.concat(datas)
-            self.__save_df(data_dir, df, self.file_name)
-
-        # remover os diretório com os arquvios separados
-        if self.merge_data:
-            logging.info(f'Removendo diretório "{data_path}"')
-            shutil.rmtree(data_path)
-        
-        # finalizar o spinner
-        self.__spinner_succeed()
+            # finalizar o spinner
+            self.__spinner_succeed()
 
     def __save(self, path, data, file_name):
         '''
@@ -339,7 +296,6 @@ class TemplateDownload():
                 data (str): conteúdo do arquivo
                 file_name (str): nome do arquivo
         '''
-        
         # pegar o dataframe
         df = self.__get_df(data)
 
@@ -354,28 +310,26 @@ class TemplateDownload():
             Salva um objeto DataFrame
 
             Params:
-                path (str): caminho onde o arquivo deve ser salvo
+                path (pathlib.Pah): caminho onde o arquivo deve ser salvo
                 df (DataFrame): objeto DataFrame
                 file_name (str): nome do arquivo
         '''
         
-        logging.info(f'Salvando o arquivo "{file_name}" em "{path}"')
 
         # definir parâmetros de salvamento
-        params = {'encoding': 'utf-8', 'sep': ',', 'index': False}
-        params_json = {'orient': 'records'}
+        params = {
+            'csv': {'encoding': 'utf-8', 'sep': ',', 'index': False},
+            'json': {'orient': 'records'}
+        }
+        write_methods = {"csv": df.to_csv, "json": df.to_json}
 
-        if self.file_type == 'csv':
-            # salvar csv
-            df.to_csv(os.path.join(
-                path, f'{file_name}.{self.file_type}'), **params)
+        kwargs = params[self.file_type]
+        write_method = write_methods[self.file_type]
+        file_name = path / f'{file_name}.{self.file_type}'
 
-        elif self.file_type == 'json':
-            # salvar json
-            df.to_json(os.path.join(
-                path, f'{file_name}.{self.file_type}'), **params_json)
-        
-        logging.info(f'Arquivo "{file_name}" salvo em "{path}"')
+        logging.info(f'Salvando o arquivo "{file_name}"')
+        write_method(file_name, **kwargs)
+        logging.info(f'Arquivo "{file_name}" salvo')
 
     def __get_df(self, data):
         '''

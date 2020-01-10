@@ -1,18 +1,3 @@
-def format_month(month):
-    '''
-        Formata o número do mês
-
-        Params:
-            month (int): mês em número
-        
-        Returns:
-            (str): mês formatado em string
-    '''
-    if month < 10:
-        return "0" + str(month)
-
-    return str(month)
-
 def format_period(start_month, start_year, end_month, end_year):
     '''
         Formatar o perído de consulta em string
@@ -28,6 +13,5 @@ def format_period(start_month, start_year, end_month, end_year):
 
     '''
     if start_month == end_month and start_year == end_year:
-        return f'{format_month(start_month)}{start_year}'
-    else:
-        return f'{format_month(start_month)}{start_year}_{format_month(end_month)}{end_year}'
+        return f'{start_month:0>2d}{start_year}'
+    return f'{start_month:0>2d}{start_year}_{end_month:0>2d}{end_year}'
