@@ -59,6 +59,4 @@ def get_files(files, priority_list=[]):
 
 
 if __name__ == '__main__':
-    dargs = DownloadArgs()
-    args = dargs.get_args()
-    main(args)
+    main(DownloadArgs().args)

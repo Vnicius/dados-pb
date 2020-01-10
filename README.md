@@ -45,6 +45,7 @@ optional arguments:
   -d [DOCS [DOCS ...]], --docs [DOCS [DOCS ...]]
                         lista de documentos para realizar o download
   --list                listar todos os documentos
+  --no-verify-ssl       ignorar certificados SSL
 ```
 
 ## Exemplos

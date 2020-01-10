@@ -34,6 +34,7 @@ class TemplateDownload():
                 de todos os arquivos do período
             output_dir (str): diretôrio de saída
             periodic_data (bool): se os dados são atualizados periodicamente
+            no_verify_ssl (bool): se desconsidera veirificação de SSL
     '''
     PANDAS_READ_METHODS = {
         "csv": partial(pd.read_csv, sep=";"),
@@ -51,7 +52,8 @@ class TemplateDownload():
                  only_year=False,
                  merge_data=False,
                  output_dir='data',
-                 periodic_data=True):
+                 periodic_data=True,
+                 no_verify_ssl=False):
         '''
             Construtor da classe TemplateDownload
 
@@ -68,6 +70,7 @@ class TemplateDownload():
                     de todos os arquivos do período
                 output_dir (str): diretôrio de saída (default: "data")
                 periodic_data (bool): se os dados são atualizados periodicamente
+                no_verify_ssl (bool): se desconsidera veirificação de SSL
         '''
 
         self.base_url = base_url
@@ -81,6 +84,7 @@ class TemplateDownload():
         self.merge_data = merge_data
         self.output_dir = output_dir
         self.periodic_data = periodic_data
+        self.verify_ssl = not no_verify_ssl
 
         self.pandas_read_method = self.PANDAS_READ_METHODS[self.file_type]
         self.__spinner = Halo(text=f'Baixando {self.get_title()}', spinner='dots')
@@ -210,11 +214,11 @@ class TemplateDownload():
             # realizar dowload dos dados
             logging.info(f'Baixando {self.get_url(0, 0)}')
             
-            data = req.get(self.get_url(0, 0)).text
+            data = req.get(self.get_url(0, 0), verify=self.verify_ssl).text
 
             logging.info(f'Baixado')
         except ConnectionError :
-            logging.error(f'Erro ao baixar {self.get_url(0, 0)}')
+            logging.error(f'Erro ao baixar {self.get_url(0, 0)}', exc_info=True)
             self.__spinner_fail()
             return
         
@@ -268,11 +272,12 @@ class TemplateDownload():
                         # realizar dowload dos dados
                         logging.info(f'Baixando {self.get_url(y, m)}')
                         
-                        data = req.get(self.get_url(y, m)).text
+                        data = req.get(self.get_url(y, m), verify=self.verify_ssl).text
 
                         logging.info(f'Baixado')
                     except ConnectionError :
-                        logging.error(f'Erro ao baixar {self.get_url(y, m)}')
+                        logging.error(f'Erro ao baixar {self.get_url(y, m)}',
+                                      exc_info=True)
                         self.__spinner_fail()
                         return
 
@@ -293,9 +298,10 @@ class TemplateDownload():
                 try:
                     # realizar dowload dos dados
                     logging.info(f'Baixando {self.get_url(y, 0)}')
-                    data = req.get(self.get_url(y, 0)).text
+                    data = req.get(self.get_url(y, 0), verify=self.verify_ssl).text
                 except ConnectionError:
-                    logging.error(f'Erro ao baixar {self.get_url(y, 0)}')
+                    logging.error(f'Erro ao baixar {self.get_url(y, 0)}',
+                                  exc_info=True)
                     self.__spinner_fail()
                     return
 

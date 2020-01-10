@@ -35,13 +35,6 @@ class DownloadArgs():
                             help='lista de documentos para realizar o download', nargs='*', default=[])
         parser.add_argument(
             '--list', help='listar todos os documentos', action='store_true')
+        parser.add_argument(
+            '--no-verify-ssl', help='ignorar certificados SSL', action='store_true')
         self.args = parser.parse_args()
-
-    def get_args(self):
-        '''
-            Retorna os argumentos
-
-            Returns:
-                (dict): argumentos
-        '''
-        return self.args

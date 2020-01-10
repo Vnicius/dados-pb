@@ -21,7 +21,7 @@ class DataDownloader(TemplateDownload):
                                        file_type=args.format, start_year=args.year,
                                        start_month=args.month, end_year=args.untilyear,
                                        end_month=args.untilmonth, merge_data=args.merge,
-                                       output_dir=args.output)
+                                       output_dir=args.output, no_verify_ssl=args.no_verify_ssl)
 
     def get_url(self, year, month):
         return self.data_config['baseURL'].format(self.file_type, year, month)
